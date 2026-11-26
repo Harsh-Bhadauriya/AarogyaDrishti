@@ -1,0 +1,1951 @@
+/* =========================================================
+   AAROGYADRISHTI — FEEDBACK PAGE
+   feedback.css
+   ========================================================= */
+
+/* =========================================================
+   1. DESIGN TOKENS
+   ========================================================= */
+
+:root {
+    --fb-bg: #06111d;
+    --fb-bg-deep: #030a12;
+    --fb-surface: rgba(8, 23, 37, 0.78);
+    --fb-surface-strong: rgba(10, 29, 46, 0.92);
+    --fb-surface-soft: rgba(18, 39, 57, 0.58);
+
+    --fb-border: rgba(100, 220, 255, 0.18);
+    --fb-border-hover: rgba(90, 225, 255, 0.42);
+
+    --fb-text: #edfaff;
+    --fb-text-soft: #b8cbd5;
+    --fb-text-muted: #8298a6;
+
+    --fb-primary: #26d9f5;
+    --fb-primary-light: #72edff;
+    --fb-secondary: #20e0b2;
+    --fb-accent: #55f0d0;
+
+    --fb-danger: #ff6b7a;
+    --fb-success: #38e6aa;
+    --fb-warning: #ffd166;
+
+    --fb-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.35),
+        0 8px 30px rgba(0, 205, 240, 0.08);
+
+    --fb-glow:
+        0 0 28px rgba(38, 217, 245, 0.16);
+
+    --fb-radius-xl: 28px;
+    --fb-radius-lg: 20px;
+    --fb-radius-md: 14px;
+    --fb-radius-sm: 10px;
+
+    --fb-max-width: 1180px;
+
+    --fb-transition:
+        220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   2. LIGHT THEME
+   ========================================================= */
+
+body.light-mode {
+    --fb-bg: #eef7fb;
+    --fb-bg-deep: #e5f2f7;
+    --fb-surface: rgba(255, 255, 255, 0.82);
+    --fb-surface-strong: rgba(255, 255, 255, 0.94);
+    --fb-surface-soft: rgba(232, 246, 250, 0.86);
+
+    --fb-border: rgba(10, 119, 145, 0.15);
+    --fb-border-hover: rgba(7, 166, 190, 0.38);
+
+    --fb-text: #102c3b;
+    --fb-text-soft: #476270;
+    --fb-text-muted: #708692;
+
+    --fb-primary: #079fc1;
+    --fb-primary-light: #00b8dc;
+    --fb-secondary: #0eae8a;
+    --fb-accent: #10cba4;
+
+    --fb-shadow:
+        0 24px 60px rgba(18, 70, 88, 0.14),
+        0 8px 24px rgba(10, 153, 184, 0.08);
+
+    --fb-glow:
+        0 0 28px rgba(0, 168, 200, 0.12);
+}
+
+
+/* =========================================================
+   3. GLOBAL PAGE
+   ========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    color: var(--fb-text);
+    background-color: var(--fb-bg);
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(3, 13, 23, 0.42),
+            rgba(3, 13, 23, 0.72)
+        ),
+        url("../images/BG_png/03_feedback_4k.png");
+
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    transition:
+        background-color 350ms ease,
+        color 350ms ease;
+}
+
+
+/* Light background overlay */
+
+body.light-mode {
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(239, 249, 252, 0.78),
+            rgba(231, 245, 249, 0.88)
+        ),
+        url("../images/BG_png/03_feedback_4k.png");
+}
+
+
+/* Background atmospheric overlay */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 15% 25%,
+            rgba(38, 217, 245, 0.09),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 70%,
+            rgba(32, 224, 178, 0.07),
+            transparent 30%
+        );
+
+    animation: feedbackAtmosphere 12s ease-in-out infinite alternate;
+}
+
+body.light-mode::before {
+    background:
+        radial-gradient(
+            circle at 15% 25%,
+            rgba(0, 171, 205, 0.07),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 70%,
+            rgba(0, 174, 139, 0.05),
+            transparent 30%
+        );
+}
+
+
+/* =========================================================
+   4. NAVBAR
+   ========================================================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    width: 100%;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(3, 13, 23, 0.88),
+            rgba(5, 18, 29, 0.72)
+        );
+
+    border-bottom: 1px solid rgba(113, 220, 246, 0.12);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.14);
+
+    transition:
+        background 300ms ease,
+        border-color 300ms ease;
+}
+
+body.light-mode .navbar {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.92),
+            rgba(245, 252, 254, 0.84)
+        );
+
+    border-bottom-color: rgba(8, 135, 163, 0.12);
+
+    box-shadow:
+        0 8px 28px rgba(26, 91, 108, 0.08);
+}
+
+.nav-container {
+    width: min(var(--fb-max-width), calc(100% - 40px));
+    min-height: 76px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+
+/* =========================================================
+   5. BRAND
+   ========================================================= */
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+
+    color: inherit;
+    text-decoration: none;
+
+    flex-shrink: 0;
+}
+
+.brand-logo-wrap {
+    width: 43px;
+    height: 43px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(38, 217, 245, 0.18),
+            rgba(32, 224, 178, 0.10)
+        );
+
+    border: 1px solid rgba(94, 224, 247, 0.25);
+
+    box-shadow:
+        0 0 22px rgba(38, 217, 245, 0.12);
+
+    transition:
+        transform var(--fb-transition),
+        box-shadow var(--fb-transition);
+}
+
+.brand:hover .brand-logo-wrap {
+    transform: translateY(-2px) rotate(-2deg);
+
+    box-shadow:
+        0 0 30px rgba(38, 217, 245, 0.24);
+}
+
+.brand-logo {
+    width: 31px;
+    height: 31px;
+
+    object-fit: contain;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.brand-name {
+    color: var(--fb-text);
+
+    font-size: 17px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.brand-tagline {
+    color: var(--fb-text-muted);
+
+    font-size: 9px;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   6. DESKTOP NAV
+   ========================================================= */
+
+.desktop-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    margin-left: auto;
+}
+
+.nav-link {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 40px;
+    padding: 0 14px;
+
+    color: var(--fb-text-soft);
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        color var(--fb-transition),
+        background var(--fb-transition),
+        transform var(--fb-transition);
+}
+
+.nav-link::after {
+    content: "";
+
+    position: absolute;
+    left: 50%;
+    bottom: 3px;
+
+    width: 0;
+    height: 2px;
+
+    border-radius: 99px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--fb-primary),
+            var(--fb-secondary)
+        );
+
+    transform: translateX(-50%);
+
+    transition:
+        width var(--fb-transition);
+}
+
+.nav-link:hover {
+    color: var(--fb-text);
+    background: rgba(38, 217, 245, 0.06);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 22px;
+}
+
+.nav-link.active {
+    color: var(--fb-primary-light);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(38, 217, 245, 0.10),
+            rgba(32, 224, 178, 0.05)
+        );
+}
+
+
+/* =========================================================
+   7. NAV ACTIONS
+   ========================================================= */
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* Theme toggle */
+
+.theme-toggle {
+    position: relative;
+
+    width: 54px;
+    height: 30px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border: 1px solid var(--fb-border);
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition:
+        border-color var(--fb-transition),
+        background var(--fb-transition);
+}
+
+.theme-toggle:hover {
+    border-color: var(--fb-border-hover);
+
+    background: rgba(38, 217, 245, 0.08);
+}
+
+.theme-toggle .moon-icon,
+.theme-toggle .sun-icon {
+    position: relative;
+    z-index: 2;
+
+    width: 14px;
+    height: 14px;
+
+    display: grid;
+    place-items: center;
+
+    font-size: 12px;
+
+    transition: opacity 200ms ease;
+}
+
+.theme-toggle .moon-icon {
+    margin-left: 6px;
+}
+
+.theme-toggle .sun-icon {
+    margin-right: 6px;
+}
+
+.toggle-track {
+    position: absolute;
+    inset: 0;
+
+    border-radius: inherit;
+}
+
+.toggle-thumb {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--fb-primary-light),
+            var(--fb-secondary)
+        );
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.22),
+        0 0 12px rgba(38, 217, 245, 0.25);
+
+    transition:
+        transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body.light-mode .toggle-thumb {
+    transform: translateX(24px);
+}
+
+
+/* Navbar CTA */
+
+.nav-cta,
+.mobile-nav-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 40px;
+    padding: 0 17px;
+
+    border-radius: 10px;
+
+    color: #02141b;
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--fb-primary-light),
+            var(--fb-secondary)
+        );
+
+    box-shadow:
+        0 7px 22px rgba(38, 217, 245, 0.15);
+
+    transition:
+        transform var(--fb-transition),
+        box-shadow var(--fb-transition);
+}
+
+.nav-cta:hover,
+.mobile-nav-cta:hover {
+    color: #02141b;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 28px rgba(38, 217, 245, 0.25);
+}
+
+
+/* =========================================================
+   8. MOBILE NAV
+   ========================================================= */
+
+.mobile-menu-btn {
+    display: none;
+
+    width: 42px;
+    height: 42px;
+
+    padding: 0;
+
+    border: 1px solid var(--fb-border);
+    border-radius: 11px;
+
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--fb-text);
+
+    cursor: pointer;
+
+    transition:
+        border-color var(--fb-transition),
+        background var(--fb-transition);
+}
+
+.mobile-menu-btn:hover {
+    border-color: var(--fb-border-hover);
+    background: rgba(38, 217, 245, 0.08);
+}
+
+.mobile-nav {
+    display: none;
+}
+
+
+/* =========================================================
+   9. MAIN FEEDBACK AREA
+   ========================================================= */
+
+.feedback-container {
+    position: relative;
+
+    width: min(820px, calc(100% - 40px));
+
+    margin: 0 auto;
+
+    padding:
+        78px 0
+        95px;
+
+    isolation: isolate;
+}
+
+
+/* Header */
+
+.feedback-header {
+    position: relative;
+
+    text-align: center;
+
+    margin-bottom: 34px;
+
+    animation:
+        feedbackHeaderIn 750ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.feedback-header::before {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 260px;
+    height: 150px;
+
+    transform:
+        translate(-50%, -50%);
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(38, 217, 245, 0.10),
+            transparent 70%
+        );
+
+    filter: blur(15px);
+
+    z-index: -1;
+}
+
+.feedback-header h1 {
+    margin: 0 0 12px;
+
+    color: var(--fb-text);
+
+    font-size:
+        clamp(32px, 5vw, 48px);
+
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    font-weight: 850;
+}
+
+.feedback-header h1::after {
+    content: "";
+
+    display: block;
+
+    width: 58px;
+    height: 3px;
+
+    margin: 15px auto 0;
+
+    border-radius: 99px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--fb-primary),
+            var(--fb-secondary)
+        );
+
+    box-shadow:
+        0 0 16px rgba(38, 217, 245, 0.32);
+}
+
+.feedback-header p {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    color: var(--fb-text-soft);
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   10. FEEDBACK CARD
+   ========================================================= */
+
+.feedback-card {
+    position: relative;
+
+    padding: clamp(24px, 5vw, 44px);
+
+    border: 1px solid var(--fb-border);
+    border-radius: var(--fb-radius-xl);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(13, 33, 50, 0.86),
+            rgba(5, 19, 31, 0.78)
+        );
+
+    box-shadow: var(--fb-shadow);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    overflow: hidden;
+
+    animation:
+        feedbackCardIn 850ms
+        120ms
+        cubic-bezier(0.22, 1, 0.36, 1)
+        both;
+
+    transition:
+        border-color 300ms ease,
+        box-shadow 300ms ease,
+        transform 300ms ease;
+}
+
+.feedback-card::before {
+    content: "";
+
+    position: absolute;
+    top: -120px;
+    right: -120px;
+
+    width: 260px;
+    height: 260px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(38, 217, 245, 0.13),
+            transparent 68%
+        );
+
+    pointer-events: none;
+}
+
+.feedback-card::after {
+    content: "";
+
+    position: absolute;
+    bottom: -140px;
+    left: -100px;
+
+    width: 280px;
+    height: 280px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(32, 224, 178, 0.08),
+            transparent 68%
+        );
+
+    pointer-events: none;
+}
+
+.feedback-card:hover {
+    border-color: rgba(72, 222, 245, 0.28);
+
+    box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.38),
+        0 0 42px rgba(38, 217, 245, 0.08);
+}
+
+body.light-mode .feedback-card {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.94),
+            rgba(246, 252, 254, 0.88)
+        );
+
+    box-shadow: var(--fb-shadow);
+}
+
+
+/* =========================================================
+   11. FORM
+   ========================================================= */
+
+#feedbackForm {
+    position: relative;
+    z-index: 2;
+}
+
+.form-group {
+    margin-bottom: 23px;
+}
+
+.form-group > label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: var(--fb-text);
+
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.form-group > label::after {
+    content: "";
+}
+
+
+/* Inputs */
+
+#feedbackForm input[type="text"],
+#feedbackForm input[type="email"],
+#feedbackForm input[type="tel"],
+#feedbackForm input[type="number"],
+#feedbackForm select,
+#feedbackForm textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border: 1px solid var(--fb-border);
+    border-radius: var(--fb-radius-md);
+
+    outline: none;
+
+    color: var(--fb-text);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.045),
+            rgba(255, 255, 255, 0.018)
+        );
+
+    font-family: inherit;
+    font-size: 14px;
+
+    transition:
+        border-color var(--fb-transition),
+        background var(--fb-transition),
+        box-shadow var(--fb-transition),
+        transform var(--fb-transition);
+}
+
+#feedbackForm input[type="text"],
+#feedbackForm input[type="email"],
+#feedbackForm input[type="tel"],
+#feedbackForm input[type="number"],
+#feedbackForm select {
+    height: 51px;
+
+    padding: 0 15px;
+}
+
+#feedbackForm textarea {
+    min-height: 125px;
+
+    padding: 14px 15px;
+
+    line-height: 1.6;
+
+    resize: vertical;
+}
+
+#feedbackForm input::placeholder,
+#feedbackForm textarea::placeholder {
+    color: var(--fb-text-muted);
+
+    opacity: 0.82;
+}
+
+
+/* Focus */
+
+#feedbackForm input[type="text"]:focus,
+#feedbackForm input[type="email"]:focus,
+#feedbackForm input[type="tel"]:focus,
+#feedbackForm input[type="number"]:focus,
+#feedbackForm select:focus,
+#feedbackForm textarea:focus {
+    border-color: var(--fb-primary);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(38, 217, 245, 0.07),
+            rgba(32, 224, 178, 0.035)
+        );
+
+    box-shadow:
+        0 0 0 3px rgba(38, 217, 245, 0.08),
+        0 8px 26px rgba(0, 0, 0, 0.14);
+}
+
+
+/* Valid autofill */
+
+#feedbackForm input:-webkit-autofill,
+#feedbackForm input:-webkit-autofill:hover,
+#feedbackForm input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--fb-text);
+
+    box-shadow:
+        0 0 0 1000px rgba(8, 24, 38, 0.95) inset;
+
+    transition:
+        background-color 9999s ease-in-out 0s;
+}
+
+
+/* Select */
+
+#feedbackForm select {
+    appearance: none;
+    -webkit-appearance: none;
+
+    cursor: pointer;
+
+    padding-right: 44px;
+
+    background-image:
+        linear-gradient(45deg, transparent 50%, var(--fb-primary) 50%),
+        linear-gradient(135deg, var(--fb-primary) 50%, transparent 50%),
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.045),
+            rgba(255, 255, 255, 0.018)
+        );
+
+    background-position:
+        calc(100% - 20px) 21px,
+        calc(100% - 15px) 21px,
+        0 0;
+
+    background-size:
+        5px 5px,
+        5px 5px,
+        100% 100%;
+
+    background-repeat: no-repeat;
+}
+
+#feedbackForm select option {
+    color: #102c3b;
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   12. RATING — 1 TO 5 GLOWING STARS
+   ========================================================= */
+
+.rating {
+    position: relative;
+
+    display: flex;
+    flex-direction: row-reverse;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    gap: 8px;
+
+    width: fit-content;
+
+    padding: 7px 10px;
+
+    border: 1px solid var(--fb-border);
+    border-radius: 15px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+}
+
+.rating input[type="radio"] {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+    pointer-events: none;
+}
+
+.rating label {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 39px;
+    height: 39px;
+
+    margin: 0;
+
+    border-radius: 10px;
+
+    color: rgba(164, 185, 194, 0.42);
+
+    font-size: 27px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        color 180ms ease,
+        transform 180ms ease,
+        text-shadow 180ms ease,
+        background 180ms ease;
+}
+
+
+/* Hover */
+
+.rating label:hover,
+.rating label:hover ~ label {
+    color: var(--fb-warning);
+
+    text-shadow:
+        0 0 7px rgba(255, 209, 102, 0.55),
+        0 0 18px rgba(255, 209, 102, 0.32);
+
+    background:
+        rgba(255, 209, 102, 0.06);
+
+    transform: translateY(-2px) scale(1.04);
+}
+
+
+/* Checked */
+
+.rating input[type="radio"]:checked + label,
+.rating input[type="radio"]:checked ~ label {
+    color: var(--fb-warning);
+
+    text-shadow:
+        0 0 7px rgba(255, 209, 102, 0.7),
+        0 0 18px rgba(255, 209, 102, 0.45),
+        0 0 30px rgba(255, 209, 102, 0.18);
+
+    background:
+        rgba(255, 209, 102, 0.055);
+}
+
+
+/* Keyboard focus */
+
+.rating input[type="radio"]:focus-visible + label {
+    outline: 2px solid var(--fb-primary);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   13. RECOMMENDATION PILLS
+   ========================================================= */
+
+.recommendation {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.recommendation label {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 48px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--fb-border);
+    border-radius: 13px;
+
+    color: var(--fb-text-soft);
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    cursor: pointer;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition:
+        color var(--fb-transition),
+        background var(--fb-transition),
+        border-color var(--fb-transition),
+        transform var(--fb-transition),
+        box-shadow var(--fb-transition);
+}
+
+.recommendation label:hover {
+    color: var(--fb-text);
+
+    border-color: var(--fb-border-hover);
+
+    background:
+        rgba(38, 217, 245, 0.055);
+
+    transform: translateY(-2px);
+}
+
+.recommendation label:has(input:checked) {
+    color: var(--fb-text);
+
+    border-color: rgba(38, 217, 245, 0.62);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(38, 217, 245, 0.13),
+            rgba(32, 224, 178, 0.09)
+        );
+
+    box-shadow:
+        0 0 22px rgba(38, 217, 245, 0.10),
+        inset 0 0 20px rgba(38, 217, 245, 0.035);
+}
+
+.recommendation label:has(input:checked)::after {
+    content: "✓";
+
+    position: absolute;
+
+    top: 6px;
+    right: 8px;
+
+    color: var(--fb-primary-light);
+
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.recommendation input[type="radio"] {
+    position: absolute;
+
+    opacity: 0;
+    pointer-events: none;
+}
+
+.recommendation label:has(input:focus-visible) {
+    outline: 2px solid var(--fb-primary);
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   14. ERROR / SUCCESS MESSAGE
+   ========================================================= */
+
+.error-message,
+.success-message {
+    margin-bottom: 24px;
+
+    padding: 14px 16px;
+
+    border-radius: 13px;
+
+    font-size: 13px;
+    line-height: 1.55;
+    font-weight: 600;
+
+    animation:
+        messageIn 450ms
+        cubic-bezier(0.22, 1, 0.36, 1)
+        both;
+}
+
+.error-message {
+    color: #ffd8dc;
+
+    border: 1px solid rgba(255, 107, 122, 0.28);
+
+    background:
+        rgba(255, 107, 122, 0.08);
+
+    box-shadow:
+        0 10px 25px rgba(255, 70, 90, 0.06);
+}
+
+.success-message {
+    color: #cffff0;
+
+    border: 1px solid rgba(56, 230, 170, 0.28);
+
+    background:
+        rgba(56, 230, 170, 0.08);
+
+    box-shadow:
+        0 10px 25px rgba(56, 230, 170, 0.06);
+}
+
+body.light-mode .error-message {
+    color: #9f2536;
+    background: rgba(255, 90, 110, 0.07);
+}
+
+body.light-mode .success-message {
+    color: #087453;
+    background: rgba(25, 188, 139, 0.07);
+}
+
+
+/* =========================================================
+   15. SUBMIT BUTTON
+   ========================================================= */
+
+.submit-btn {
+    position: relative;
+
+    width: 100%;
+    min-height: 55px;
+
+    margin-top: 8px;
+
+    padding: 0 22px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    color: #03151c;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--fb-primary-light) 0%,
+            var(--fb-primary) 45%,
+            var(--fb-secondary) 100%
+        );
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 850;
+    letter-spacing: 0.01em;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 30px rgba(38, 217, 245, 0.18);
+
+    transition:
+        transform var(--fb-transition),
+        box-shadow var(--fb-transition),
+        filter var(--fb-transition);
+}
+
+
+/* Button shine */
+
+.submit-btn::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.28),
+            transparent
+        );
+
+    transform: skewX(-18deg);
+
+    transition:
+        left 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.submit-btn:hover::before {
+    left: 140%;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+
+    filter: saturate(1.08);
+
+    box-shadow:
+        0 17px 38px rgba(38, 217, 245, 0.26),
+        0 0 28px rgba(38, 217, 245, 0.12);
+}
+
+.submit-btn:active {
+    transform: translateY(0) scale(0.985);
+
+    box-shadow:
+        0 8px 18px rgba(38, 217, 245, 0.16);
+}
+
+.submit-btn:focus-visible {
+    outline: 2px solid var(--fb-primary-light);
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   16. FOOTER
+   ========================================================= */
+
+.footer {
+    position: relative;
+
+    margin-top: auto;
+
+    border-top: 1px solid var(--fb-border);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(3, 13, 23, 0.82),
+            rgba(2, 9, 16, 0.95)
+        );
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+body.light-mode .footer {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(244, 251, 253, 0.90),
+            rgba(235, 247, 250, 0.96)
+        );
+}
+
+.footer .section-container {
+    width: min(var(--fb-max-width), calc(100% - 40px));
+
+    margin: 0 auto;
+}
+
+.footer-main {
+    display: grid;
+
+    grid-template-columns:
+        minmax(240px, 1.5fr)
+        repeat(3, minmax(120px, 1fr));
+
+    gap: 45px;
+
+    padding: 55px 0 42px;
+}
+
+.footer-brand {
+    max-width: 330px;
+}
+
+.footer-brand .brand {
+    margin-bottom: 15px;
+}
+
+.footer-brand p {
+    margin: 0;
+
+    color: var(--fb-text-muted);
+
+    font-size: 12px;
+    line-height: 1.75;
+}
+
+.footer-links {
+    display: contents;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+}
+
+.footer-heading {
+    margin: 0 0 7px;
+
+    color: var(--fb-text);
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.footer-column a {
+    color: var(--fb-text-muted);
+
+    text-decoration: none;
+
+    font-size: 12px;
+    line-height: 1.6;
+
+    transition:
+        color var(--fb-transition),
+        transform var(--fb-transition);
+}
+
+.footer-column a:hover {
+    color: var(--fb-primary-light);
+
+    transform: translateX(3px);
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 18px 0;
+
+    border-top: 1px solid var(--fb-border);
+
+    color: var(--fb-text-muted);
+
+    font-size: 11px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+
+/* =========================================================
+   17. ACCESSIBILITY
+   ========================================================= */
+
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--fb-primary-light);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   18. RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .desktop-nav {
+        gap: 2px;
+    }
+
+    .nav-link {
+        padding: 0 10px;
+
+        font-size: 12px;
+    }
+
+    .footer-main {
+        grid-template-columns:
+            1.4fr
+            repeat(3, 1fr);
+
+        gap: 25px;
+    }
+}
+
+
+/* =========================================================
+   19. RESPONSIVE — MOBILE NAV
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .nav-container {
+        min-height: 68px;
+    }
+
+    .desktop-nav,
+    .nav-actions .nav-cta {
+        display: none;
+    }
+
+    .nav-actions {
+        margin-left: auto;
+    }
+
+    .mobile-menu-btn {
+        display: grid;
+        place-items: center;
+    }
+
+    .mobile-nav {
+        display: flex;
+
+        flex-direction: column;
+
+        width: min(
+            var(--fb-max-width),
+            calc(100% - 30px)
+        );
+
+        max-height: 0;
+
+        margin: 0 auto;
+
+        overflow: hidden;
+
+        opacity: 0;
+        pointer-events: none;
+
+        border-radius: 0 0 16px 16px;
+
+        transition:
+            max-height 350ms ease,
+            opacity 250ms ease,
+            padding 350ms ease;
+    }
+
+    .mobile-nav.active,
+    .mobile-nav.open {
+        max-height: 500px;
+
+        padding: 10px 0 18px;
+
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .mobile-nav-link {
+        display: flex;
+        align-items: center;
+
+        min-height: 45px;
+
+        padding: 0 14px;
+
+        border-radius: 10px;
+
+        color: var(--fb-text-soft);
+
+        text-decoration: none;
+
+        font-size: 13px;
+        font-weight: 650;
+
+        transition:
+            background var(--fb-transition),
+            color var(--fb-transition);
+    }
+
+    .mobile-nav-link:hover,
+    .mobile-nav-link.active {
+        color: var(--fb-primary-light);
+
+        background:
+            rgba(38, 217, 245, 0.07);
+    }
+
+    .mobile-nav-cta {
+        margin-top: 9px;
+    }
+
+    .feedback-container {
+        padding-top: 60px;
+    }
+}
+
+
+/* =========================================================
+   20. RESPONSIVE — SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .nav-container {
+        width: calc(100% - 28px);
+    }
+
+    .brand-tagline {
+        display: none;
+    }
+
+    .feedback-container {
+        width: calc(100% - 28px);
+
+        padding:
+            50px 0
+            70px;
+    }
+
+    .feedback-header {
+        margin-bottom: 27px;
+    }
+
+    .feedback-header h1 {
+        font-size: clamp(30px, 9vw, 42px);
+    }
+
+    .feedback-header p {
+        font-size: 13px;
+        line-height: 1.65;
+    }
+
+    .feedback-card {
+        padding: 24px 20px;
+
+        border-radius: 22px;
+    }
+
+    .recommendation {
+        grid-template-columns: 1fr;
+    }
+
+    .recommendation label {
+        justify-content: flex-start;
+
+        padding: 0 16px;
+    }
+
+    .footer-main {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 32px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+
+        max-width: 500px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 6px;
+    }
+}
+
+
+/* =========================================================
+   21. RESPONSIVE — PHONE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .nav-container {
+        min-height: 64px;
+    }
+
+    .brand-logo-wrap {
+        width: 39px;
+        height: 39px;
+
+        border-radius: 11px;
+    }
+
+    .brand-logo {
+        width: 28px;
+        height: 28px;
+    }
+
+    .brand-name {
+        font-size: 15px;
+    }
+
+    .feedback-container {
+        width: calc(100% - 22px);
+
+        padding:
+            42px 0
+            55px;
+    }
+
+    .feedback-header h1 {
+        font-size: 31px;
+    }
+
+    .feedback-header p {
+        font-size: 12px;
+    }
+
+    .feedback-card {
+        padding: 21px 15px;
+
+        border-radius: 19px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group > label {
+        font-size: 12px;
+    }
+
+    #feedbackForm input[type="text"],
+    #feedbackForm input[type="email"],
+    #feedbackForm input[type="tel"],
+    #feedbackForm input[type="number"],
+    #feedbackForm select {
+        height: 48px;
+
+        font-size: 13px;
+    }
+
+    #feedbackForm textarea {
+        min-height: 115px;
+
+        font-size: 13px;
+    }
+
+    .rating {
+        width: 100%;
+
+        justify-content: space-between;
+
+        gap: 2px;
+
+        padding: 6px;
+    }
+
+    .rating label {
+        flex: 1;
+
+        width: auto;
+        height: 42px;
+
+        font-size: 25px;
+    }
+
+    .submit-btn {
+        min-height: 52px;
+
+        font-size: 13px;
+    }
+
+    .footer .section-container {
+        width: calc(100% - 28px);
+    }
+
+    .footer-main {
+        grid-template-columns: 1fr;
+
+        gap: 27px;
+
+        padding: 42px 0 32px;
+    }
+
+    .footer-brand {
+        grid-column: auto;
+    }
+}
+
+
+/* =========================================================
+   22. VERY SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .brand-name {
+        font-size: 14px;
+    }
+
+    .theme-toggle {
+        width: 49px;
+        height: 28px;
+    }
+
+    .toggle-thumb {
+        width: 18px;
+        height: 18px;
+    }
+
+    body.light-mode .toggle-thumb {
+        transform: translateX(21px);
+    }
+
+    .rating label {
+        font-size: 22px;
+    }
+
+    .feedback-card {
+        padding: 18px 13px;
+    }
+}
+
+
+/* =========================================================
+   23. ANIMATIONS
+   ========================================================= */
+
+@keyframes feedbackHeaderIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes feedbackCardIn {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(30px)
+            scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes messageIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes feedbackAtmosphere {
+
+    from {
+        transform: translate3d(-1%, -1%, 0) scale(1);
+    }
+
+    to {
+        transform: translate3d(1%, 1%, 0) scale(1.025);
+    }
+}
+
+
+/* =========================================================
+   24. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    body::before {
+        animation: none;
+    }
+}
+
+
+/* =========================================================
+   25. SELECTION
+   ========================================================= */
+
+::selection {
+    color: #02151b;
+
+    background:
+        var(--fb-primary);
+}
+
+
+/* =========================================================
+   26. SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--fb-bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+    border: 2px solid var(--fb-bg-deep);
+    border-radius: 99px;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--fb-primary),
+            var(--fb-secondary)
+        );
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background:
+        linear-gradient(
+            180deg,
+            var(--fb-primary-light),
+            var(--fb-primary)
+        );
+}
+
+
+/* =========================================================
+   END — AAROGYADRISHTI FEEDBACK CSS
+   ========================================================= */
