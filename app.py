@@ -4,9 +4,9 @@ import uuid
 from datetime import datetime
 
 import cv2
+import gdown
 import imutils
 import numpy as np
-
 
 
 from flask import (
@@ -28,7 +28,6 @@ from tensorflow.keras.applications.vgg19 import VGG19
 
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-from datetime import datetime
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -57,7 +56,7 @@ except Exception as e:
 
 
 # ============================================================
-# FOLDERS
+# FOLDERS & MODEL CONFIG
 # ============================================================
 
 UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
@@ -71,6 +70,7 @@ MODEL_PATH = os.path.join(
     MODEL_FOLDER,
     "vgg19_model_03.weights.h5"
 )
+DRIVE_FILE_ID = "145v4tuD17KPc-oit5bG_1E4IP2gtj97z"
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(MODEL_FOLDER, exist_ok=True)
@@ -209,6 +209,12 @@ try:
         layer.trainable = True
 
     print("Architecture created.")
+
+    if not os.path.exists(MODEL_PATH):
+        print("Model weights not found locally. Downloading from Google Drive...")
+        os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
+        gdown.download(id=DRIVE_FILE_ID, output=MODEL_PATH, quiet=False)
+
     print("Loading Model 03 weights...")
 
     if not os.path.exists(MODEL_PATH):
@@ -217,7 +223,7 @@ try:
             "Model weights not found:\n"
             + MODEL_PATH
             + "\n\n"
-            "Put vgg19_model_03.weights.h5 inside the model folder."
+            "Could not download vgg19_model_03.weights.h5 from Google Drive."
         )
 
     model_03.load_weights(
@@ -1032,10 +1038,6 @@ def report():
         image_path=None
     )
 
-# ============================================================
-# REPORT PAGE
-# ============================================================
-
 
 # ============================================================
 # UPLOADED IMAGE ROUTE
@@ -1184,12 +1186,8 @@ def api_logout():
     return jsonify({"success": True, "message": "Logged out successfully."})
 
 
-
 # ============================================================
 # FEEDBACK PAGE
-#
-# GET  -> Show feedback form
-# POST -> Save feedback
 # ============================================================
 
 @app.route(
@@ -1198,20 +1196,11 @@ def api_logout():
 )
 def feedback():
 
-    # --------------------------------------------------------
-    # GET REQUEST
-    # --------------------------------------------------------
-
     if request.method == "GET":
 
         return render_template(
             "feedback.html"
         )
-
-
-    # --------------------------------------------------------
-    # GET FORM DATA
-    # --------------------------------------------------------
 
     name = request.form.get(
         "name",
@@ -1257,18 +1246,12 @@ def feedback():
         "liked"
     )
 
-
-    # --------------------------------------------------------
-    # VALIDATION
-    # --------------------------------------------------------
-
     if not name:
 
         return render_template(
             "feedback.html",
             error="Please enter your name."
         )
-
 
     if not email:
 
@@ -1277,14 +1260,12 @@ def feedback():
             error="Please enter your email."
         )
 
-
     if not rating:
 
         return render_template(
             "feedback.html",
             error="Please select a rating."
         )
-
 
     if not category:
 
@@ -1293,7 +1274,6 @@ def feedback():
             error="Please select a feedback category."
         )
 
-
     if not feedback_text:
 
         return render_template(
@@ -1301,18 +1281,12 @@ def feedback():
             error="Please write your feedback."
         )
 
-
     if not recommendation:
 
         return render_template(
             "feedback.html",
             error="Please select your recommendation."
         )
-
-
-    # --------------------------------------------------------
-    # CREATE FEEDBACK RECORD
-    # --------------------------------------------------------
 
     feedback_record = {
 
@@ -1359,43 +1333,18 @@ def feedback():
             )
     }
 
-
-    # --------------------------------------------------------
-    # LOAD EXISTING FEEDBACK
-    # --------------------------------------------------------
-
     feedback_data = load_feedback()
-
-
-    # --------------------------------------------------------
-    # ADD NEW FEEDBACK
-    # --------------------------------------------------------
 
     feedback_data.insert(
         0,
         feedback_record
     )
 
-
-    # --------------------------------------------------------
-    # KEEP LATEST 500 FEEDBACKS
-    # --------------------------------------------------------
-
     feedback_data = feedback_data[:500]
-
-
-    # --------------------------------------------------------
-    # SAVE FEEDBACK
-    # --------------------------------------------------------
 
     save_feedback(
         feedback_data
     )
-
-
-    # --------------------------------------------------------
-    # SHOW SUCCESS MESSAGE
-    # --------------------------------------------------------
 
     return render_template(
         "feedback.html",
