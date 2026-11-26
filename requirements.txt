@@ -1,0 +1,10 @@
+Flask==3.1.2
+gunicorn
+pymongo
+dnspython
+tensorflow-cpu==2.20.0
+opencv-python-headless==4.12.0.88
+numpy==2.2.6
+Pillow==11.3.0
+h5py==3.14.0
+reportlab==4.4.9
