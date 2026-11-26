@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="AarogyaDrishti - AI-powered Brain Tumor Screening System"
+    >
+
+    <title>About | AarogyaDrishti</title>
+
+
+    <!-- Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- About CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/about.css') }}"
+    >
+
+
+    <!-- Main CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         BACKGROUND
+    ====================================================== -->
+
+    <div class="about-background">
+
+        <div class="about-grid"></div>
+
+        <div class="about-orb orb-one"></div>
+
+        <div class="about-orb orb-two"></div>
+
+        <div class="about-orb orb-three"></div>
+
+        <div class="floating-particle particle-one"></div>
+
+        <div class="floating-particle particle-two"></div>
+
+        <div class="floating-particle particle-three"></div>
+
+        <div class="floating-particle particle-four"></div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <header
+        class="navbar"
+        id="navbar"
+    >
+
+        <div class="nav-container">
+
+
+            <!-- BRAND -->
+
+            <a
+                href="{{ url_for('home') }}"
+                class="brand"
+            >
+
+                <img
+                    src="{{ url_for('static', filename='images/AarogyaDrishti-logo.png') }}"
+                    alt="AarogyaDrishti Logo"
+                    class="brand-logo"
+                >
+
+
+                <div class="brand-text">
+
+                    <strong>
+                        Aarogya<span>Drishti</span>
+                    </strong>
+
+                    <small>
+                        Medical AI Intelligence
+                    </small>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="nav-links">
+
+                <a href="{{ url_for('home') }}">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>
+                        Home
+                    </span>
+
+                </a>
+
+
+                <a href="{{ url_for('predict') }}">
+
+                    <i class="fa-solid fa-brain"></i>
+
+                    <span>
+                        Prediction
+                    </span>
+
+                </a>
+
+
+                <a href="{{ url_for('history') }}">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                    <span>
+                        History
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="{{ url_for('about') }}"
+                    class="active"
+                >
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    <span>
+                        About
+                    </span>
+
+                </a>
+
+
+                <!-- FEEDBACK -->
+
+                <a href="{{ url_for('feedback') }}">
+
+                    <i class="fa-solid fa-comment-dots"></i>
+
+                    <span>
+                        Feedback
+                    </span>
+
+                </a>
+
+            </nav>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="nav-actions">
+
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Toggle theme"
+                >
+
+                    <i class="fa-solid fa-sun"></i>
+
+                    <i class="fa-solid fa-moon"></i>
+
+                </button>
+
+
+                <button
+                    class="mobile-menu-btn"
+                    id="mobileMenuBtn"
+                    type="button"
+                    aria-label="Open menu"
+                >
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="about-hero">
+
+            <div class="about-container">
+
+
+                <div class="hero-content">
+
+
+                    <div class="hero-badge">
+
+                        <span class="badge-pulse"></span>
+
+                        ABOUT AAROGYADRISHTI
+
+                    </div>
+
+
+                    <h1>
+
+                        Intelligence
+
+                        <span>
+                            With Purpose.
+                        </span>
+
+                    </h1>
+
+
+                    <p>
+
+                        AarogyaDrishti is an AI-powered
+                        brain MRI screening system designed
+                        to assist in the early identification
+                        of brain tumor patterns using
+                        Deep Learning and Transfer Learning.
+
+                    </p>
+
+
+                    <div class="hero-actions">
+
+
+                        <a
+                            href="{{ url_for('predict') }}"
+                            class="hero-btn primary-btn"
+                        >
+
+                            <i class="fa-solid fa-brain"></i>
+
+                            Try AI Prediction
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+
+                        <a
+                            href="#team"
+                            class="hero-btn secondary-btn"
+                        >
+
+                            Meet Our Team
+
+                            <i class="fa-solid fa-users"></i>
+
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- AI VISUAL -->
+
+                <div class="hero-visual">
+
+
+                    <div class="visual-glow"></div>
+
+
+                    <div class="brain-orbit orbit-one"></div>
+
+                    <div class="brain-orbit orbit-two"></div>
+
+                    <div class="brain-orbit orbit-three"></div>
+
+
+                    <div class="brain-core">
+
+
+                        <div class="scan-line"></div>
+
+
+                        <img
+                            src="{{ url_for('static', filename='images/brain-bg.jpg') }}"
+                            alt="AI Brain Visualization"
+                        >
+
+
+                        <div class="brain-overlay"></div>
+
+
+                        <div class="ai-corner top-left"></div>
+
+                        <div class="ai-corner top-right"></div>
+
+                        <div class="ai-corner bottom-left"></div>
+
+                        <div class="ai-corner bottom-right"></div>
+
+
+                        <div class="core-label">
+
+                            <span>
+                                AI CORE
+                            </span>
+
+                            <strong>
+                                VGG19
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-data data-one">
+
+                        <i class="fa-solid fa-microchip"></i>
+
+                        <div>
+
+                            <span>
+                                MODEL
+                            </span>
+
+                            <strong>
+                                VGG19
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-data data-two">
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                        <div>
+
+                            <span>
+                                AI SCREENING
+                            </span>
+
+                            <strong>
+                                ACTIVE
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-data data-three">
+
+                        <i class="fa-solid fa-shield-heart"></i>
+
+                        <div>
+
+                            <span>
+                                HEALTH AI
+                            </span>
+
+                            <strong>
+                                ASSISTIVE
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <section class="about-stats">
+
+            <div class="about-container">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-brain"></i>
+
+                    </div>
+
+                    <strong>
+                        AI
+                    </strong>
+
+                    <span>
+                        Powered Screening
+                    </span>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-network-wired"></i>
+
+                    </div>
+
+                    <strong>
+                        VGG19
+                    </strong>
+
+                    <span>
+                        Transfer Learning
+                    </span>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-image"></i>
+
+                    </div>
+
+                    <strong>
+                        MRI
+                    </strong>
+
+                    <span>
+                        Image Analysis
+                    </span>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-user-doctor"></i>
+
+                    </div>
+
+                    <strong>
+                        AI + Care
+                    </strong>
+
+                    <span>
+                        Patient Assistance
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ABOUT PROJECT
+        ================================================== -->
+
+        <section class="project-section">
+
+            <div class="about-container">
+
+
+                <div class="section-heading">
+
+                    <span>
+                        THE PROJECT
+                    </span>
+
+                    <h2>
+                        Where AI Meets
+                        <em>Healthcare.</em>
+                    </h2>
+
+                    <p>
+                        Built with the vision of making
+                        intelligent brain MRI screening
+                        more accessible and understandable.
+                    </p>
+
+                </div>
+
+
+
+                <div class="project-grid">
+
+
+                    <!-- CARD 1 -->
+
+                    <article class="project-card">
+
+                        <div class="project-number">
+                            01
+                        </div>
+
+
+                        <div class="project-card-icon">
+
+                            <i class="fa-solid fa-brain"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Intelligent Screening
+                        </h3>
+
+
+                        <p>
+                            The system analyzes uploaded
+                            brain MRI images and uses a trained
+                            Deep Learning model to classify
+                            the image into tumorous or
+                            non-tumorous categories.
+                        </p>
+
+
+                        <div class="card-line"></div>
+
+                    </article>
+
+
+
+                    <!-- CARD 2 -->
+
+                    <article class="project-card">
+
+                        <div class="project-number">
+                            02
+                        </div>
+
+
+                        <div class="project-card-icon">
+
+                            <i class="fa-solid fa-network-wired"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Transfer Learning
+                        </h3>
+
+
+                        <p>
+                            AarogyaDrishti uses VGG19 as the
+                            foundation for extracting meaningful
+                            visual features from brain MRI
+                            images before performing classification.
+                        </p>
+
+
+                        <div class="card-line"></div>
+
+                    </article>
+
+
+
+                    <!-- CARD 3 -->
+
+                    <article class="project-card">
+
+                        <div class="project-number">
+                            03
+                        </div>
+
+
+                        <div class="project-card-icon">
+
+                            <i class="fa-solid fa-file-medical"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Personalized Reports
+                        </h3>
+
+
+                        <p>
+                            Prediction results can be presented
+                            through a structured report containing
+                            patient information, prediction,
+                            confidence and supportive recommendations.
+                        </p>
+
+
+                        <div class="card-line"></div>
+
+                    </article>
+
+
+
+                    <!-- CARD 4 -->
+
+                    <article class="project-card">
+
+                        <div class="project-number">
+                            04
+                        </div>
+
+
+                        <div class="project-card-icon">
+
+                            <i class="fa-solid fa-volume-high"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Dr. Voice
+                        </h3>
+
+
+                        <p>
+                            The platform is designed to provide
+                            voice-based explanations in English
+                            and Hindi so that screening results
+                            can be understood more easily.
+                        </p>
+
+
+                        <div class="card-line"></div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             WORKFLOW
+        ================================================== -->
+
+        <section class="workflow-section">
+
+            <div class="about-container">
+
+
+                <div class="section-heading center">
+
+                    <span>
+                        HOW IT WORKS
+                    </span>
+
+                    <h2>
+                        From MRI To
+                        <em>Insight.</em>
+                    </h2>
+
+                </div>
+
+
+                <div class="workflow">
+
+
+                    <div class="workflow-line"></div>
+
+
+                    <div class="workflow-step">
+
+                        <div class="workflow-node">
+
+                            <span>
+                                01
+                            </span>
+
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                        </div>
+
+
+                        <div class="workflow-content">
+
+                            <span>
+                                INPUT
+                            </span>
+
+                            <h3>
+                                Upload MRI
+                            </h3>
+
+                            <p>
+                                The user uploads a brain MRI
+                                image through the prediction
+                                interface.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="workflow-step reverse">
+
+                        <div class="workflow-node">
+
+                            <span>
+                                02
+                            </span>
+
+                            <i class="fa-solid fa-gears"></i>
+
+                        </div>
+
+
+                        <div class="workflow-content">
+
+                            <span>
+                                PROCESSING
+                            </span>
+
+                            <h3>
+                                AI Analysis
+                            </h3>
+
+                            <p>
+                                The image is processed and
+                                passed through the trained
+                                VGG19-based classification model.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="workflow-step">
+
+                        <div class="workflow-node">
+
+                            <span>
+                                03
+                            </span>
+
+                            <i class="fa-solid fa-chart-pie"></i>
+
+                        </div>
+
+
+                        <div class="workflow-content">
+
+                            <span>
+                                RESULT
+                            </span>
+
+                            <h3>
+                                Prediction
+                            </h3>
+
+                            <p>
+                                The system provides the predicted
+                                class together with its model
+                                confidence.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="workflow-step reverse">
+
+                        <div class="workflow-node">
+
+                            <span>
+                                04
+                            </span>
+
+                            <i class="fa-solid fa-file-medical"></i>
+
+                        </div>
+
+
+                        <div class="workflow-content">
+
+                            <span>
+                                ASSISTANCE
+                            </span>
+
+                            <h3>
+                                Report & Guidance
+                            </h3>
+
+                            <p>
+                                The result can be presented with
+                                recommendations, voice assistance
+                                and a structured health report.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             TEAM
+        ================================================== -->
+
+        <section
+            class="team-section"
+            id="team"
+        >
+
+            <div class="about-container">
+
+
+                <div class="section-heading center">
+
+                    <span>
+                        THE TEAM
+                    </span>
+
+                    <h2>
+                        Minds Behind
+                        <em>AarogyaDrishti.</em>
+                    </h2>
+
+                    <p>
+                        Four roles. One vision.
+                        Building intelligent healthcare
+                        technology together.
+                    </p>
+
+                </div>
+
+
+
+                <div class="team-grid">
+
+
+                    <!-- SHIVAM -->
+
+                    <article class="team-card team-green">
+
+                        <div class="team-image">
+
+                            <img
+                                src="{{ url_for('static', filename='images/team/Shivam_profile.png') }}"
+                                alt="Shivam Singh"
+                            >
+
+                            <div class="team-image-overlay"></div>
+
+                            <div class="member-number">
+                                01
+                            </div>
+
+                            <div class="team-social">
+
+                                <a href="#" aria-label="LinkedIn">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </a>
+
+                                <a href="#" aria-label="GitHub">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="team-info">
+
+                            <span class="team-role">
+                                TEAM LEAD • AI/ML & FULL-STACK
+                            </span>
+
+                            <h3>
+                                Shivam Singh
+                            </h3>
+
+                            <p class="team-id">
+                                25LMMC3027
+                            </p>
+
+                            <p class="team-description">
+                                Leads the AI/ML architecture,
+                                Deep Learning model development,
+                                preprocessing, training,
+                                evaluation and full-stack
+                                application integration.
+                            </p>
+
+                            <div class="team-tags">
+
+                                <span>AI/ML</span>
+
+                                <span>Deep Learning</span>
+
+                                <span>Flask</span>
+
+                                <span>Full-Stack</span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- DEEPENDRA -->
+
+                    <article class="team-card team-cyan">
+
+                        <div class="team-image">
+
+                            <img
+                                src="{{ url_for('static', filename='images/team/Deependra.png') }}"
+                                alt="Deependra Singh"
+                            >
+
+                            <div class="team-image-overlay"></div>
+
+                            <div class="member-number">
+                                02
+                            </div>
+
+                            <div class="team-social">
+
+                                <a href="#" aria-label="LinkedIn">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </a>
+
+                                <a href="#" aria-label="GitHub">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="team-info">
+
+                            <span class="team-role">
+                                DATABASE & BACKEND ENGINEER
+                            </span>
+
+                            <h3>
+                                Deependra Singh
+                            </h3>
+
+                            <p class="team-id">
+                                25LMMC3029
+                            </p>
+
+                            <p class="team-description">
+                                Handles patient-record data
+                                management, authentication,
+                                prediction history and secure
+                                integration between the database
+                                and backend.
+                            </p>
+
+                            <div class="team-tags">
+
+                                <span>Database</span>
+
+                                <span>Backend</span>
+
+                                <span>Authentication</span>
+
+                                <span>Security</span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- HARSH -->
+
+                    <article class="team-card team-purple">
+
+                        <div class="team-image">
+
+                            <img
+                                src="{{ url_for('static', filename='images/team/Harsh.jpeg') }}"
+                                alt="Harsh Bhadauriya"
+                            >
+
+                            <div class="team-image-overlay"></div>
+
+                            <div class="member-number">
+                                03
+                            </div>
+
+                            <div class="team-social">
+
+                                <a href="#" aria-label="LinkedIn">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </a>
+
+                                <a href="#" aria-label="GitHub">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="team-info">
+
+                            <span class="team-role">
+                                DEPLOYMENT & INTEGRATION
+                            </span>
+
+                            <h3>
+                                Harsh Bhadauriya
+                            </h3>
+
+                            <p class="team-id">
+                                25LMMC3030
+                            </p>
+
+                            <p class="team-description">
+                                Responsible for application
+                                deployment, model integration,
+                                repository management,
+                                testing and deployment optimization.
+                            </p>
+
+                            <div class="team-tags">
+
+                                <span>Deployment</span>
+
+                                <span>Integration</span>
+
+                                <span>Git</span>
+
+                                <span>Testing</span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- HRICHA -->
+
+                    <article class="team-card team-blue">
+
+                        <div class="team-image">
+
+                            <img
+                                src="{{ url_for('static', filename='images/team/Hricha.png') }}"
+                                alt="Hricha Singh"
+                            >
+
+                            <div class="team-image-overlay"></div>
+
+                            <div class="member-number">
+                                04
+                            </div>
+
+                            <div class="team-social">
+
+                                <a href="#" aria-label="LinkedIn">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </a>
+
+                                <a href="#" aria-label="Portfolio">
+                                    <i class="fa-solid fa-link"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="team-info">
+
+                            <span class="team-role">
+                                DOCUMENTATION & COORDINATION
+                            </span>
+
+                            <h3>
+                                Hricha Singh
+                            </h3>
+
+                            <p class="team-id">
+                                Project Coordinator
+                            </p>
+
+                            <p class="team-description">
+                                Coordinates project planning,
+                                documentation, presentation
+                                materials, communication,
+                                testing documentation and
+                                final project submission.
+                            </p>
+
+                            <div class="team-tags">
+
+                                <span>Documentation</span>
+
+                                <span>Planning</span>
+
+                                <span>Coordination</span>
+
+                                <span>Presentation</span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             DISCLAIMER
+        ================================================== -->
+
+        <section class="disclaimer-section">
+
+            <div class="about-container">
+
+
+                <div class="disclaimer-card">
+
+
+                    <div class="disclaimer-icon">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    </div>
+
+
+                    <div class="disclaimer-content">
+
+                        <span>
+                            IMPORTANT
+                        </span>
+
+                        <h3>
+                            AI-assisted screening,
+                            not a medical diagnosis.
+                        </h3>
+
+                        <p>
+                            AarogyaDrishti is designed as an
+                            AI-assisted screening and educational
+                            system. Its predictions should not
+                            replace professional medical
+                            examination, radiological assessment
+                            or consultation with a qualified doctor.
+                        </p>
+
+                    </div>
+
+
+                    <div class="disclaimer-shield">
+
+                        <i class="fa-solid fa-shield-heart"></i>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="about-footer">
+
+        <div class="about-container">
+
+
+            <div class="footer-main">
+
+
+                <div class="footer-brand">
+
+                    <a
+                        href="{{ url_for('home') }}"
+                        class="brand"
+                    >
+
+                        <img
+                            src="{{ url_for('static', filename='images/AarogyaDrishti-logo.png') }}"
+                            alt="AarogyaDrishti"
+                            class="brand-logo"
+                        >
+
+
+                        <div class="brand-text">
+
+                            <strong>
+                                Aarogya<span>Drishti</span>
+                            </strong>
+
+                            <small>
+                                Medical AI Intelligence
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <p>
+                        Intelligent brain MRI screening
+                        powered by AI, designed to support
+                        better healthcare awareness.
+                    </p>
+
+                </div>
+
+
+
+                <!-- FOOTER NAVIGATION -->
+
+                <div class="footer-navigation">
+
+                    <span>
+                        NAVIGATION
+                    </span>
+
+
+                    <a href="{{ url_for('home') }}">
+                        Home
+                    </a>
+
+
+                    <a href="{{ url_for('predict') }}">
+                        Prediction
+                    </a>
+
+
+                    <a href="{{ url_for('history') }}">
+                        History
+                    </a>
+
+
+                    <a href="{{ url_for('about') }}">
+                        About
+                    </a>
+
+
+                    <!-- FEEDBACK -->
+
+                    <a href="{{ url_for('feedback') }}">
+                        Feedback
+                    </a>
+
+                </div>
+
+
+
+                <div class="footer-tech">
+
+                    <span>
+                        TECHNOLOGY
+                    </span>
+
+                    <div class="tech-pills">
+
+                        <span>
+                            Python
+                        </span>
+
+                        <span>
+                            Flask
+                        </span>
+
+                        <span>
+                            TensorFlow
+                        </span>
+
+                        <span>
+                            VGG19
+                        </span>
+
+                        <span>
+                            HTML
+                        </span>
+
+                        <span>
+                            CSS
+                        </span>
+
+                        <span>
+                            JavaScript
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span>
+                    © 2026 AarogyaDrishti
+                </span>
+
+                <span>
+                    Built with AI • Innovation • Teamwork
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/main.js') }}"
+    ></script>
+
+
+    <script
+        src="{{ url_for('static', filename='js/about.js') }}"
+    ></script>
+
+
+</body>
+
+</html>

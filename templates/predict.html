@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="AarogyaDrishti AI Brain MRI Prediction System"
+    >
+
+    <meta
+        name="theme-color"
+        content="#061318"
+    >
+
+    <title>AI Prediction | AarogyaDrishti</title>
+
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         GLOBAL CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/predict.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         PAGE LOADER
+    ====================================================== -->
+
+    <div
+        class="page-loader"
+        id="pageLoader"
+    >
+
+        <div class="loader-orbit">
+
+            <div class="loader-core">
+                A
+            </div>
+
+        </div>
+
+        <span>
+            Preparing AI Analysis
+        </span>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         BACKGROUND
+    ====================================================== -->
+
+    <div class="predict-background">
+
+        <div class="predict-orb orb-green"></div>
+
+        <div class="predict-orb orb-cyan"></div>
+
+        <div class="predict-orb orb-blue"></div>
+
+        <div class="medical-grid"></div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <header
+        class="navbar"
+        id="navbar"
+    >
+
+        <div class="nav-container">
+
+
+            <!-- BRAND -->
+
+            <a
+                href="{{ url_for('home') }}"
+                class="brand"
+            >
+
+                <div class="brand-logo-wrap">
+
+                    <img
+                        src="{{ url_for(
+                            'static',
+                            filename='images/AarogyaDrishti-logo.png'
+                        ) }}"
+                        alt="AarogyaDrishti Logo"
+                        class="brand-logo"
+                    >
+
+                </div>
+
+
+                <div class="brand-text">
+
+                    <span class="brand-name">
+                        AarogyaDrishti
+                    </span>
+
+                    <span class="brand-tagline">
+                        AI • Brain Health
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- DESKTOP NAV -->
+
+            <nav class="desktop-nav">
+
+                <a
+                    href="{{ url_for('home') }}"
+                    class="nav-link"
+                >
+                    Home
+                </a>
+
+                <a
+                    href="{{ url_for('predict') }}"
+                    class="nav-link active"
+                >
+                    Prediction
+                </a>
+
+                <a
+                    href="{{ url_for('history') }}"
+                    class="nav-link"
+                >
+                    History
+                </a>
+
+                <a
+                    href="{{ url_for('about') }}"
+                    class="nav-link"
+                >
+                    About
+                </a>
+
+                <!-- FEEDBACK -->
+
+                <a
+                    href="{{ url_for('feedback') }}"
+                    class="nav-link"
+                >
+                    Feedback
+                </a>
+
+            </nav>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="nav-actions">
+
+
+                <!-- THEME -->
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Toggle theme"
+                    title="Toggle dark and light mode"
+                >
+
+                    <span class="theme-icon moon-icon">
+                        ☾
+                    </span>
+
+                    <span class="theme-icon sun-icon">
+                        ☀
+                    </span>
+
+                    <span class="toggle-track">
+
+                        <span class="toggle-thumb"></span>
+
+                    </span>
+
+                </button>
+
+
+
+                <!-- MOBILE MENU -->
+
+                <button
+                    class="mobile-menu-btn"
+                    id="mobileMenuBtn"
+                    type="button"
+                    aria-label="Open navigation"
+                    aria-expanded="false"
+                >
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MOBILE NAV -->
+
+        <div
+            class="mobile-nav"
+            id="mobileNav"
+        >
+
+            <a
+                href="{{ url_for('home') }}"
+                class="mobile-nav-link"
+            >
+                Home
+            </a>
+
+            <a
+                href="{{ url_for('predict') }}"
+                class="mobile-nav-link active"
+            >
+                Prediction
+            </a>
+
+            <a
+                href="{{ url_for('history') }}"
+                class="mobile-nav-link"
+            >
+                History
+            </a>
+
+            <a
+                href="{{ url_for('about') }}"
+                class="mobile-nav-link"
+            >
+                About
+            </a>
+
+            <!-- FEEDBACK -->
+
+            <a
+                href="{{ url_for('feedback') }}"
+                class="mobile-nav-link"
+            >
+                Feedback
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="prediction-page">
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="prediction-hero">
+
+            <div class="prediction-container">
+
+                <div class="prediction-heading">
+
+
+                    <div class="prediction-badge">
+
+                        <span class="live-dot"></span>
+
+                        <span>
+                            AI DIAGNOSTIC ASSISTANT
+                        </span>
+
+                        <span class="badge-icon">
+                            ✦
+                        </span>
+
+                    </div>
+
+
+                    <h1>
+
+                        Brain MRI
+
+                        <span>
+                            AI Analysis
+                        </span>
+
+                    </h1>
+
+
+                    <p>
+                        Upload a brain MRI image and let
+                        AarogyaDrishti's deep-learning model
+                        analyze the image for AI-assisted
+                        classification.
+                    </p>
+
+
+                    <div class="analysis-status">
+
+                        <span class="status-indicator"></span>
+
+                        <span>
+                            VGG19 Model 03
+                        </span>
+
+                        <span class="status-separator">
+                            •
+                        </span>
+
+                        <span>
+                            AI Engine Ready
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="prediction-breadcrumb">
+
+                    <a href="{{ url_for('home') }}">
+                        Home
+                    </a>
+
+                    <span>
+                        /
+                    </span>
+
+                    <strong>
+                        Prediction
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FLASK ERROR
+        ================================================== -->
+
+        {% if error %}
+
+        <section class="prediction-error-section">
+
+            <div class="prediction-container">
+
+                <div class="prediction-error">
+
+                    <div class="prediction-error-icon">
+                        !
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Analysis Error
+                        </strong>
+
+                        <p>
+                            {{ error }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        {% endif %}
+
+
+
+        <!-- =================================================
+             WORKSPACE
+        ================================================== -->
+
+        <section class="prediction-workspace">
+
+            <div class="prediction-container">
+
+
+                <form
+                    id="predictionForm"
+                    action="{{ url_for('predict') }}"
+                    method="POST"
+                    enctype="multipart/form-data"
+                    class="prediction-form"
+                >
+
+                    <div class="workspace-grid">
+
+
+                        <!-- =================================================
+                             LEFT
+                        ================================================== -->
+
+                        <div class="workspace-left">
+
+
+                            <!-- PATIENT DETAILS -->
+
+                            <div class="glass-card patient-card">
+
+                                <div class="card-header">
+
+                                    <div class="card-heading-icon">
+                                        ♙
+                                    </div>
+
+                                    <div>
+
+                                        <span class="card-eyebrow">
+                                            PATIENT INFORMATION
+                                        </span>
+
+                                        <h2>
+                                            Basic Details
+                                        </h2>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="patient-fields">
+
+
+                                    <!-- NAME -->
+
+                                    <div class="field-group">
+
+                                        <label for="patient_name">
+                                            Full Name
+                                        </label>
+
+                                        <div class="input-wrapper">
+
+                                            <span class="input-icon">
+                                                ✦
+                                            </span>
+
+                                            <input
+                                                type="text"
+                                                id="patient_name"
+                                                name="patient_name"
+                                                placeholder="Enter patient's name"
+                                                autocomplete="name"
+                                                maxlength="100"
+                                            >
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <!-- AGE + GENDER -->
+
+                                    <div class="field-row">
+
+
+                                        <div class="field-group">
+
+                                            <label for="patient_age">
+                                                Age
+                                            </label>
+
+                                            <div class="input-wrapper">
+
+                                                <span class="input-icon">
+                                                    #
+                                                </span>
+
+                                                <input
+                                                    type="number"
+                                                    id="patient_age"
+                                                    name="patient_age"
+                                                    min="1"
+                                                    max="120"
+                                                    placeholder="Age"
+                                                >
+
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <div class="field-group">
+
+                                            <label for="patient_gender">
+                                                Gender
+                                            </label>
+
+                                            <div class="input-wrapper select-wrapper">
+
+                                                <span class="input-icon">
+                                                    ◉
+                                                </span>
+
+                                                <select
+                                                    id="patient_gender"
+                                                    name="patient_gender"
+                                                >
+
+                                                    <option value="">
+                                                        Select
+                                                    </option>
+
+                                                    <option value="Male">
+                                                        Male
+                                                    </option>
+
+                                                    <option value="Female">
+                                                        Female
+                                                    </option>
+
+                                                    <option value="Other">
+                                                        Other
+                                                    </option>
+
+                                                    <option value="Prefer not to say">
+                                                        Prefer not to say
+                                                    </option>
+
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <!-- CONTACT -->
+
+                                    <div class="field-group">
+
+                                        <label for="patient_contact">
+
+                                            Contact
+
+                                            <span>
+                                                Optional
+                                            </span>
+
+                                        </label>
+
+                                        <div class="input-wrapper">
+
+                                            <span class="input-icon">
+                                                @
+                                            </span>
+
+                                            <input
+                                                type="text"
+                                                id="patient_contact"
+                                                name="patient_contact"
+                                                placeholder="Phone or email"
+                                                autocomplete="off"
+                                            >
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- MRI UPLOAD -->
+
+                            <div class="glass-card upload-card">
+
+                                <div class="card-header">
+
+                                    <div class="card-heading-icon upload-icon">
+                                        ↑
+                                    </div>
+
+                                    <div>
+
+                                        <span class="card-eyebrow">
+                                            MRI IMAGE
+                                        </span>
+
+                                        <h2>
+                                            Upload Scan
+                                        </h2>
+
+                                    </div>
+
+                                    <div class="required-label">
+                                        REQUIRED
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- DROPZONE -->
+
+                                <div
+                                    class="upload-zone"
+                                    id="uploadZone"
+                                >
+
+                                    <input
+                                        type="file"
+                                        id="mriImage"
+                                        name="file"
+                                        accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                                        hidden
+                                        required
+                                    >
+
+
+
+                                    <!-- DEFAULT -->
+
+                                    <div
+                                        class="upload-default"
+                                        id="uploadDefault"
+                                    >
+
+                                        <div class="upload-visual">
+
+                                            <div class="upload-ring ring-outer"></div>
+
+                                            <div class="upload-ring ring-inner"></div>
+
+                                            <div class="upload-center">
+                                                ↑
+                                            </div>
+
+                                        </div>
+
+
+                                        <h3>
+                                            Drop your MRI image here
+                                        </h3>
+
+
+                                        <p>
+
+                                            or
+
+                                            <button
+                                                type="button"
+                                                class="browse-btn"
+                                                id="browseBtn"
+                                            >
+                                                browse from device
+                                            </button>
+
+                                        </p>
+
+
+                                        <div class="upload-specs">
+
+                                            <span>
+                                                JPG
+                                            </span>
+
+                                            <span>
+                                                PNG
+                                            </span>
+
+                                            <span>
+                                                WEBP
+                                            </span>
+
+                                            <span>
+                                                MAX 10 MB
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <!-- PREVIEW -->
+
+                                    <div
+                                        class="upload-preview"
+                                        id="uploadPreview"
+                                    >
+
+                                        <div class="preview-image-wrap">
+
+                                            <img
+                                                id="previewImage"
+                                                src=""
+                                                alt="MRI Preview"
+                                            >
+
+                                            <div class="preview-scan"></div>
+
+                                        </div>
+
+
+                                        <div class="preview-info">
+
+                                            <span class="preview-label">
+                                                IMAGE READY
+                                            </span>
+
+                                            <h3 id="previewFileName">
+                                                MRI Image
+                                            </h3>
+
+                                            <div class="preview-meta">
+
+                                                <span id="previewFileSize">
+                                                    0 KB
+                                                </span>
+
+                                                <span>
+                                                    •
+                                                </span>
+
+                                                <span>
+                                                    Ready for AI
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="remove-image"
+                                            id="removeImage"
+                                            aria-label="Remove image"
+                                        >
+                                            ×
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="upload-note">
+
+                                    <span>
+                                        ⓘ
+                                    </span>
+
+                                    <p>
+                                        For best results, use a clear brain
+                                        MRI image with minimal artifacts.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- =================================================
+                             RIGHT
+                        ================================================== -->
+
+                        <div class="workspace-right">
+
+
+                            <!-- AI CORE -->
+
+                            <div class="ai-core-card">
+
+                                <div class="core-grid"></div>
+
+                                <div class="core-orb orb-a"></div>
+
+                                <div class="core-orb orb-b"></div>
+
+
+                                <div class="core-content">
+
+
+                                    <div class="core-status">
+
+                                        <span class="core-live"></span>
+
+                                        AI ENGINE ONLINE
+
+                                    </div>
+
+
+                                    <div class="core-visual">
+
+                                        <div class="core-ring core-ring-one"></div>
+
+                                        <div class="core-ring core-ring-two"></div>
+
+                                        <div class="core-ring core-ring-three"></div>
+
+
+                                        <div class="core-brain">
+
+                                            <span>
+                                                AI
+                                            </span>
+
+                                            <small>
+                                                VGG19
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <h3>
+
+                                        Aarogya
+
+                                        <span>
+                                            AI Core
+                                        </span>
+
+                                    </h3>
+
+
+                                    <p>
+                                        Deep-learning image
+                                        classification engine
+                                    </p>
+
+
+                                    <div class="core-details">
+
+
+                                        <div>
+
+                                            <span>
+                                                MODEL
+                                            </span>
+
+                                            <strong>
+                                                VGG19
+                                            </strong>
+
+                                        </div>
+
+
+                                        <div>
+
+                                            <span>
+                                                INPUT
+                                            </span>
+
+                                            <strong>
+                                                240×240
+                                            </strong>
+
+                                        </div>
+
+
+                                        <div>
+
+                                            <span>
+                                                CLASSES
+                                            </span>
+
+                                            <strong>
+                                                02
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- PIPELINE -->
+
+                            <div class="glass-card pipeline-card">
+
+                                <div class="card-header compact">
+
+                                    <div class="card-heading-icon">
+                                        ◌
+                                    </div>
+
+                                    <div>
+
+                                        <span class="card-eyebrow">
+                                            PROCESS
+                                        </span>
+
+                                        <h2>
+                                            Analysis Pipeline
+                                        </h2>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="pipeline">
+
+
+                                    <div class="pipeline-step">
+
+                                        <div class="pipeline-icon">
+                                            ↑
+                                        </div>
+
+                                        <div class="pipeline-text">
+
+                                            <strong>
+                                                Image Upload
+                                            </strong>
+
+                                            <span>
+                                                MRI image received
+                                            </span>
+
+                                        </div>
+
+                                        <div class="pipeline-check">
+                                            01
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="pipeline-connector"></div>
+
+
+                                    <div class="pipeline-step">
+
+                                        <div class="pipeline-icon">
+                                            ◈
+                                        </div>
+
+                                        <div class="pipeline-text">
+
+                                            <strong>
+                                                Preprocessing
+                                            </strong>
+
+                                            <span>
+                                                Resize & normalize
+                                            </span>
+
+                                        </div>
+
+                                        <div class="pipeline-check">
+                                            02
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="pipeline-connector"></div>
+
+
+                                    <div class="pipeline-step">
+
+                                        <div class="pipeline-icon">
+                                            ✦
+                                        </div>
+
+                                        <div class="pipeline-text">
+
+                                            <strong>
+                                                Deep Learning
+                                            </strong>
+
+                                            <span>
+                                                VGG19 analysis
+                                            </span>
+
+                                        </div>
+
+                                        <div class="pipeline-check">
+                                            03
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="pipeline-connector"></div>
+
+
+                                    <div class="pipeline-step">
+
+                                        <div class="pipeline-icon">
+                                            ✓
+                                        </div>
+
+                                        <div class="pipeline-text">
+
+                                            <strong>
+                                                Classification
+                                            </strong>
+
+                                            <span>
+                                                Generate AI result
+                                            </span>
+
+                                        </div>
+
+                                        <div class="pipeline-check">
+                                            04
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- ANALYZE BUTTON -->
+
+                            <div class="analysis-action">
+
+                                <button
+                                    type="submit"
+                                    class="analyze-btn"
+                                    id="analyzeBtn"
+                                >
+
+                                    <span class="analyze-icon">
+                                        ✦
+                                    </span>
+
+                                    <span class="analyze-text">
+                                        Analyze MRI
+                                    </span>
+
+                                    <span class="analyze-arrow">
+                                        →
+                                    </span>
+
+                                    <span class="analyze-loader"></span>
+
+                                </button>
+
+
+                                <p class="action-disclaimer">
+
+                                    By continuing, you acknowledge that this
+                                    AI analysis is intended for educational
+                                    and research purposes and is not a
+                                    substitute for professional medical advice.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RESULT PREVIEW
+        ================================================== -->
+
+        <section
+            class="prediction-result-section"
+            id="predictionResultSection"
+            hidden
+        >
+
+            <div class="prediction-container">
+
+                <div class="prediction-result-card">
+
+
+                    <div class="result-header">
+
+                        <span class="card-eyebrow">
+                            AI ANALYSIS RESULT
+                        </span>
+
+                        <h2>
+                            MRI Classification
+                        </h2>
+
+                    </div>
+
+
+                    <div class="result-main">
+
+
+                        <div class="result-status">
+
+                            <span
+                                id="resultStatusDot"
+                                class="result-status-dot"
+                            ></span>
+
+                            <span
+                                id="resultPrediction"
+                            >
+                                Awaiting Result
+                            </span>
+
+                        </div>
+
+
+                        <div class="result-confidence">
+
+                            <span>
+                                Confidence
+                            </span>
+
+                            <strong
+                                id="resultConfidence"
+                            >
+                                0%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="result-probabilities">
+
+
+                            <div class="result-probability">
+
+                                <div>
+
+                                    <span>
+                                        No Tumor
+                                    </span>
+
+                                    <strong
+                                        id="noTumorConfidence"
+                                    >
+                                        0%
+                                    </strong>
+
+                                </div>
+
+                                <div class="result-progress">
+
+                                    <span
+                                        id="noTumorBar"
+                                    ></span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="result-probability">
+
+                                <div>
+
+                                    <span>
+                                        Tumor
+                                    </span>
+
+                                    <strong
+                                        id="tumorConfidence"
+                                    >
+                                        0%
+                                    </strong>
+
+                                </div>
+
+                                <div class="result-progress">
+
+                                    <span
+                                        id="tumorBar"
+                                    ></span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="result-risk">
+
+                            <span>
+                                Risk Assessment
+                            </span>
+
+                            <strong
+                                id="resultRisk"
+                            >
+                                Pending
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="result-actions">
+
+                        <a
+                            href="{{ url_for('report') }}"
+                            class="primary-btn"
+                        >
+                            View Full Report →
+                        </a>
+
+                        <a
+                            href="{{ url_for('predict') }}"
+                            class="secondary-btn"
+                        >
+                            New Analysis
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             INFORMATION STRIP
+        ================================================== -->
+
+        <section class="prediction-info">
+
+            <div class="prediction-container">
+
+                <div class="info-grid">
+
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            🔒
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Privacy First
+                            </strong>
+
+                            <span>
+                                Your uploaded image is processed
+                                through the application.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            ⚡
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Fast Analysis
+                            </strong>
+
+                            <span>
+                                AI inference is designed for
+                                quick classification.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            ◎
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                AI-Assisted
+                            </strong>
+
+                            <span>
+                                Results are generated by the
+                                trained VGG19 model.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            ♡
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Human Guidance
+                            </strong>
+
+                            <span>
+                                Always consult a qualified
+                                medical professional.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             DISCLAIMER
+        ================================================== -->
+
+        <section class="prediction-disclaimer">
+
+            <div class="prediction-container">
+
+                <div class="medical-disclaimer">
+
+                    <div class="disclaimer-symbol">
+                        !
+                    </div>
+
+
+                    <div class="disclaimer-body">
+
+                        <span>
+                            MEDICAL DISCLAIMER
+                        </span>
+
+                        <p>
+                            AarogyaDrishti is an AI-assisted educational
+                            and research platform. The prediction generated
+                            by the model should not be interpreted as a
+                            confirmed medical diagnosis. MRI interpretation
+                            and treatment decisions must always be performed
+                            by qualified healthcare professionals.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
+
+        <div class="prediction-container">
+
+            <div class="footer-main">
+
+
+                <div class="footer-brand">
+
+                    <a
+                        href="{{ url_for('home') }}"
+                        class="brand"
+                    >
+
+                        <div class="brand-logo-wrap">
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename='images/AarogyaDrishti-logo.png'
+                                ) }}"
+                                alt="AarogyaDrishti Logo"
+                                class="brand-logo"
+                            >
+
+                        </div>
+
+                        <div class="brand-text">
+
+                            <span class="brand-name">
+                                AarogyaDrishti
+                            </span>
+
+                            <span class="brand-tagline">
+                                AI • Brain Health
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                    <p>
+                        Intelligent vision for better
+                        brain-health awareness.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-mini-links">
+
+                    <a href="{{ url_for('home') }}">
+                        Home
+                    </a>
+
+                    <a href="{{ url_for('history') }}">
+                        History
+                    </a>
+
+                    <a href="{{ url_for('about') }}">
+                        About
+                    </a>
+
+                    <!-- FEEDBACK -->
+
+                    <a href="{{ url_for('feedback') }}">
+                        Feedback
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span>
+                    © 2026 AarogyaDrishti
+                </span>
+
+                <span>
+                    AI • VGG19 • Brain MRI
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        class="predict-toast"
+        id="predictToast"
+    >
+
+        <div class="toast-icon">
+            !
+        </div>
+
+        <div class="toast-content">
+
+            <strong id="toastTitle">
+                Notice
+            </strong>
+
+            <span id="toastMessage">
+                Something needs your attention.
+            </span>
+
+        </div>
+
+        <button
+            type="button"
+            id="toastClose"
+            aria-label="Close notification"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/main.js') }}"
+    ></script>
+
+    <script
+        src="{{ url_for('static', filename='js/predict.js') }}"
+    ></script>
+
+
+</body>
+
+</html>

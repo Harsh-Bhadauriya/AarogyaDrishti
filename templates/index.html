@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AarogyaDrishti | AI-Powered Brain Health</title>
+    <meta name="description" content="AarogyaDrishti is an AI-powered brain MRI analysis and health guidance platform using deep learning.">
+    
+    <!-- Preload Background Image for Zero-Lag Paint -->
+    <link rel="preload" as="image" href="{{ url_for('static', filename='images/background img/01_mri_prediction_4k.png') }}">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets with Cache Busting -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}?v=3.0">
+
+    <!-- Direct Background Image Injection -->
+    <style>
+        body {
+            background-color: #030914 !important;
+            background-image: 
+                radial-gradient(circle at 10% 5%, rgba(18, 211, 154, 0.15), transparent 40%),
+                radial-gradient(circle at 90% 15%, rgba(22, 205, 232, 0.15), transparent 40%),
+                linear-gradient(rgba(3, 9, 20, 0.65), rgba(3, 9, 20, 0.75)),
+                url("{{ url_for('static', filename='images/background img/01_mri_prediction_4k.png') }}") !important;
+            background-repeat: no-repeat !important;
+            background-position: center top !important;
+            background-size: cover !important;
+            background-attachment: scroll !important;
+        }
+
+        body.light-theme {
+            background-color: #f4fafb !important;
+            background-image: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- ================= PAGE LOADER ================= -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-orbit">
+            <div class="loader-core">A</div>
+        </div>
+        <span>Initializing AarogyaDrishti</span>
+    </div>
+
+    <!-- ================= AMBIENT BACKGROUND ================= -->
+    <div class="ambient-background">
+        <div class="ambient-orb orb-one"></div>
+        <div class="ambient-orb orb-two"></div>
+        <div class="ambient-orb orb-three"></div>
+    </div>
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- BRAND -->
+            <a href="{{ url_for('home') }}" class="brand">
+                <div class="brand-logo-wrap">
+                    <img 
+                        src="{{ url_for('static', filename='images/AarogyaDrishti-logo.png') }}" 
+                        alt="AarogyaDrishti Logo" 
+                        class="brand-logo"
+                        width="42"
+                        height="42"
+                        decoding="async"
+                    >
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">AarogyaDrishti</span>
+                    <span class="brand-tagline">AI • Brain Health</span>
+                </div>
+            </a>
+
+            <!-- DESKTOP NAVIGATION -->
+            <nav class="desktop-nav">
+                <a href="{{ url_for('home') }}" class="nav-link active">Home</a>
+                <a href="{{ url_for('predict') }}" class="nav-link">Prediction</a>
+                <a href="{{ url_for('history') }}" class="nav-link">History</a>
+                <a href="{{ url_for('about') }}" class="nav-link">About</a>
+                <a href="{{ url_for('feedback') }}" class="nav-link">Feedback</a>
+            </nav>
+
+            <!-- NAV ACTIONS -->
+            <div class="nav-actions">
+                <!-- THEME TOGGLE -->
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle dark and light mode">
+                    <span class="theme-icon moon-icon">☾</span>
+                    <span class="theme-icon sun-icon">☀</span>
+                    <span class="toggle-track">
+                        <span class="toggle-thumb"></span>
+                    </span>
+                </button>
+
+            
+                <!-- LOGIN / LOGOUT -->
+                {% if current_user %}
+                    <span class="nav-user-name" style="color: #12d39a; font-size: 14px; font-weight: 600; margin-right: 4px;">
+                        Hi, {{ current_user.name }}
+                    </span>
+                    <button type="button" onclick="logoutUser()" class="nav-auth-btn logout-btn">
+                        Logout
+                    </button>
+                {% else %}
+                    <button type="button" onclick="openAuthModal('login')" class="nav-auth-btn">
+                        Login
+                    </button>
+                {% endif %}
+
+                <!-- ANALYZE MRI -->
+                <a href="{{ url_for('predict') }}" class="nav-cta">
+                    <span>Analyze MRI</span>
+                    <span class="cta-arrow">↗</span>
+                </a>
+
+                <!-- MOBILE MENU BUTTON -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Open navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- MOBILE NAVIGATION -->
+       <div class="mobile-nav" id="mobileNav">
+            <a href="{{ url_for('home') }}" class="mobile-nav-link">Home</a>
+            <a href="{{ url_for('predict') }}" class="mobile-nav-link">Prediction</a>
+            <a href="{{ url_for('history') }}" class="mobile-nav-link">History</a>
+            <a href="{{ url_for('about') }}" class="mobile-nav-link">About</a>
+            <a href="{{ url_for('feedback') }}" class="mobile-nav-link">Feedback</a>
+            {% if current_user %}
+                <a href="javascript:void(0)" onclick="logoutUser()" class="mobile-nav-link" style="color: #ff6b6b;">
+                    Logout ({{ current_user.name }})
+                </a>
+            {% else %}
+                <a href="javascript:void(0)" onclick="openAuthModal('login')" class="mobile-nav-link" style="color: #12d39a;">
+                    Login / Sign Up
+                </a>
+            {% endif %}
+            <a href="{{ url_for('predict') }}" class="mobile-nav-cta">
+                Analyze MRI <span>↗</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero-section">
+            <div class="hero-container">
+                <!-- HERO CONTENT -->
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="status-dot"></span>
+                        <span>AI-POWERED BRAIN HEALTH</span>
+                        <span class="badge-spark">✦</span>
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="title-line">See Beyond</span>
+                        <span class="title-gradient">The Image.</span>
+                        <span class="title-line title-small">Understand Your Brain.</span>
+                    </h1>
+                    <p class="hero-description">
+                        AarogyaDrishti combines advanced deep learning with brain MRI analysis to provide an intelligent, easy-to-understand AI classification experience.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="{{ url_for('predict') }}" class="primary-btn">
+                            <span class="btn-icon">✦</span>
+                            <span>Analyze MRI</span>
+                            <span class="btn-arrow">→</span>
+                        </a>
+                        <a href="#how-it-works" class="secondary-btn">
+                            <span class="play-icon">▶</span>
+                            <span>How It Works</span>
+                        </a>
+                    </div>
+                    <div class="hero-trust">
+                        <div class="trust-avatars">
+                            <div class="trust-avatar avatar-one">A</div>
+                            <div class="trust-avatar avatar-two">AI</div>
+                            <div class="trust-avatar avatar-three">✦</div>
+                        </div>
+                        <div class="trust-text">
+                            <strong>AI-assisted analysis</strong>
+                            <span>Built for research & educational use</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HERO VISUAL -->
+                <div class="hero-visual">
+                    <div class="visual-glow"></div>
+                    <div class="visual-ring ring-one"></div>
+                    <div class="visual-ring ring-two"></div>
+                    
+                    <div class="brain-stage">
+                        <div class="brain-backdrop"></div>
+                        <img 
+                            src="{{ url_for('static', filename='images/brain-bg.png') }}" 
+                            alt="AI Brain Visualization" 
+                            class="brain-image"
+                            width="520"
+                            height="520"
+                            loading="eager"
+                            decoding="async"
+                        >
+                        <div class="scan-line"></div>
+
+                        <!-- FLOATING CARDS -->
+                        <div class="floating-card card-analysis">
+                            <div class="mini-icon">✦</div>
+                            <div>
+                                <span class="mini-label">AI ANALYSIS</span>
+                                <strong>Ready</strong>
+                            </div>
+                            <span class="live-dot"></span>
+                        </div>
+
+                        <div class="floating-card card-model">
+                            <div class="model-icon">AI</div>
+                            <div>
+                                <span class="mini-label">DEEP LEARNING</span>
+                                <strong>VGG19</strong>
+                            </div>
+                        </div>
+
+                        <div class="floating-card card-confidence">
+                            <div class="confidence-ring">
+                                <span>91%</span>
+                            </div>
+                            <div>
+                                <span class="mini-label">MODEL</span>
+                                <strong>Accuracy</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="visual-caption">
+                        <span class="caption-line"></span>
+                        <span>Intelligent • Visual • Responsible</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-scroll">
+                <span>Scroll to explore</span>
+            </div>
+        </section>
+
+        <!-- STATS SECTION -->
+        <section class="stats-section">
+            <div class="section-container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">90.94%</span>
+                        <span class="stat-label">Test Accuracy</span>
+                        <span class="stat-line"></span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">VGG19</span>
+                        <span class="stat-label">Deep Learning Model</span>
+                        <span class="stat-line"></span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">240×240</span>
+                        <span class="stat-label">MRI Input Resolution</span>
+                        <span class="stat-line"></span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">AI Classification Classes</span>
+                        <span class="stat-line"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTRO SECTION -->
+        <section class="intro-section">
+            <div class="section-container">
+                <div class="section-heading">
+                    <div class="section-eyebrow">
+                        <span></span>
+                        THE AAROGYADRISHTI APPROACH
+                    </div>
+                    <h2>
+                        Intelligence designed <span>around you.</span>
+                    </h2>
+                    <p>
+                        From MRI upload to AI-assisted classification, AarogyaDrishti transforms a complex machine-learning workflow into a simple and understandable experience.
+                    </p>
+                </div>
+                <div class="feature-grid">
+                    <article class="feature-card feature-large">
+                        <div class="feature-top">
+                            <div class="feature-number">01</div>
+                            <div class="feature-icon">◈</div>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Intelligent MRI Analysis</h3>
+                            <p>Upload a brain MRI image and let the trained VGG19 deep-learning model analyze its visual patterns.</p>
+                        </div>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-top">
+                            <div class="feature-number">02</div>
+                            <div class="feature-icon">◎</div>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Clear Results</h3>
+                            <p>Receive an easy-to-understand AI classification with its confidence score.</p>
+                        </div>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-top">
+                            <div class="feature-number">03</div>
+                            <div class="feature-icon">◉</div>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Health Guidance</h3>
+                            <p>Explore general educational lifestyle and wellness guidance alongside your result.</p>
+                        </div>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-top">
+                            <div class="feature-number">04</div>
+                            <div class="feature-icon">↗</div>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Personal Reports</h3>
+                            <p>Generate a structured report containing your analysis details and recommendations.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section class="how-section" id="how-it-works">
+            <div class="section-container">
+                <div class="section-heading centered">
+                    <div class="section-eyebrow">
+                        <span></span>
+                        SIMPLE PROCESS
+                        <span></span>
+                    </div>
+                    <h2>From image to <span>insight.</span></h2>
+                    <p>A streamlined AI workflow designed to make complex image classification easier to understand.</p>
+                </div>
+                <div class="workflow">
+                    <div class="workflow-line"></div>
+                    <div class="workflow-step">
+                        <div class="workflow-circle"><span>01</span></div>
+                        <h3>Upload</h3>
+                        <p>Upload your MRI image through the secure analysis interface.</p>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="workflow-circle"><span>02</span></div>
+                        <h3>Process</h3>
+                        <p>The image is resized and normalized before entering the AI pipeline.</p>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="workflow-circle"><span>03</span></div>
+                        <h3>Analyze</h3>
+                        <p>The VGG19 model evaluates the visual patterns within the MRI image.</p>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="workflow-circle"><span>04</span></div>
+                        <h3>Understand</h3>
+                        <p>View the classification, confidence and supporting educational guidance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODEL SECTION -->
+        <section class="model-section">
+            <div class="section-container">
+                <div class="model-panel">
+                    <div class="model-visual">
+                        <div class="model-core">
+                            <span>V19</span>
+                            <small>AI CORE</small>
+                        </div>
+                    </div>
+                    <div class="model-content">
+                        <div class="section-eyebrow">
+                            <span></span>
+                            POWERED BY DEEP LEARNING
+                        </div>
+                        <h2>VGG19. <span>Trained for the task.</span></h2>
+                        <p>AarogyaDrishti uses a VGG19-based transfer-learning architecture trained for binary brain MRI classification.</p>
+                        <div class="model-metrics">
+                            <div class="metric">
+                                <strong>90.94%</strong>
+                                <span>Test Accuracy</span>
+                            </div>
+                            <div class="metric">
+                                <strong>0.91</strong>
+                                <span>F1 Score</span>
+                            </div>
+                            <div class="metric">
+                                <strong>2</strong>
+                                <span>Classes</span>
+                            </div>
+                        </div>
+                        <a href="{{ url_for('predict') }}" class="outline-btn">
+                            Start Analysis <span>→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA SECTION -->
+        <section class="cta-section">
+            <div class="cta-container">
+                <div class="cta-content">
+                    <div class="cta-icon">🧠</div>
+                    <div>
+                        <span class="cta-eyebrow">READY WHEN YOU ARE</span>
+                        <h2>Turn an MRI image into <span>AI-assisted insight.</span></h2>
+                    </div>
+                    <a href="{{ url_for('predict') }}" class="primary-btn cta-button">
+                        <span>Analyze MRI</span>
+                        <span class="btn-arrow">↗</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- DISCLAIMER -->
+        <section class="disclaimer-section">
+            <div class="section-container">
+                <div class="disclaimer-card">
+                    <div class="disclaimer-icon">!</div>
+                    <div class="disclaimer-content">
+                        <span class="disclaimer-title">IMPORTANT MEDICAL DISCLAIMER</span>
+                        <p>
+                            AarogyaDrishti provides AI-assisted image classification for educational and research purposes. Its results should not be considered a medical diagnosis, treatment recommendation, or substitute for professional medical advice. Always consult a qualified healthcare professional for clinical evaluation and medical decisions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div class="section-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="{{ url_for('home') }}" class="brand">
+                        <div class="brand-logo-wrap">
+                            <img 
+                                src="{{ url_for('static', filename='images/AarogyaDrishti-logo.png') }}" 
+                                alt="AarogyaDrishti" 
+                                class="brand-logo"
+                                width="42"
+                                height="42"
+                                decoding="async"
+                            >
+                        </div>
+                        <div class="brand-text">
+                            <span class="brand-name">AarogyaDrishti</span>
+                            <span class="brand-tagline">AI • Brain Health</span>
+                        </div>
+                    </a>
+                    <p>Intelligent vision for better brain-health awareness.</p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <span class="footer-heading">Explore</span>
+                        <a href="{{ url_for('home') }}">Home</a>
+                        <a href="{{ url_for('predict') }}">Prediction</a>
+                        <a href="{{ url_for('history') }}">History</a>
+                        <a href="{{ url_for('about') }}">About</a>
+                        <a href="{{ url_for('feedback') }}">Feedback</a>
+                    </div>
+                    <div class="footer-column">
+                        <span class="footer-heading">Platform</span>
+                        <a href="#how-it-works">How It Works</a>
+                        <a href="{{ url_for('predict') }}">AI Analysis</a>
+                        <a href="{{ url_for('predict') }}">Generate Report</a>
+                        <a href="{{ url_for('feedback') }}">Give Feedback</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© AarogyaDrishti. Built with AI & care.</span>
+                <span>VGG19 • Deep Learning • Brain MRI</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MAIN JAVASCRIPT -->
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+
+
+
+    <!-- ================= AUTH POPUP MODAL ================= -->
+    <style>
+        .nav-auth-btn {
+            padding: 9px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(18, 211, 154, 0.45);
+            background: rgba(18, 211, 154, 0.12);
+            color: #12d39a;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .nav-auth-btn:hover {
+            background: #12d39a;
+            color: #030914;
+        }
+        .nav-auth-btn.logout-btn {
+            border-color: rgba(239, 68, 68, 0.5);
+            background: rgba(239, 68, 68, 0.12);
+            color: #f87171;
+        }
+        .nav-auth-btn.logout-btn:hover {
+            background: #ef4444;
+            color: #ffffff;
+        }
+        .auth-overlay {
+            display: none;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background: rgba(3, 9, 20, 0.78);
+            backdrop-filter: blur(6px);
+            z-index: 99999 !important;
+            justify-content: center;
+            align-items: center;
+        }
+        .auth-overlay.active { display: flex; }
+        .auth-box {
+            background: #0b1628;
+            color: #f8fafc;
+            border: 1px solid rgba(18, 211, 154, 0.25);
+            width: 92%;
+            max-width: 400px;
+            border-radius: 18px;
+            padding: 26px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+            position: relative;
+        }
+        body.light-theme .auth-box {
+            background: #ffffff;
+            color: #0f172a;
+            border-color: #cbd5e1;
+        }
+        .auth-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 24px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            color: #94a3b8;
+        }
+        .auth-tabs {
+            display: flex;
+            gap: 8px;
+            margin: 8px 0 20px;
+        }
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 10px;
+            background: transparent;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .auth-tab.active {
+            background: linear-gradient(135deg, #12d39a, #16cde8);
+            color: #030914;
+            border-color: transparent;
+        }
+        .auth-field { margin-bottom: 14px; }
+        .auth-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #cbd5e1;
+        }
+        body.light-theme .auth-field label { color: #334155; }
+        .auth-field input {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            border-radius: 10px;
+            background: rgba(15, 23, 42, 0.65);
+            color: #ffffff;
+            font-size: 14px;
+            box-sizing: border-box;
+            outline: none;
+        }
+        body.light-theme .auth-field input {
+            background: #f8fafc;
+            color: #0f172a;
+        }
+        .auth-field input:focus { border-color: #12d39a; }
+        .auth-submit {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #12d39a, #16cde8);
+            color: #030914;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .auth-msg {
+            margin-top: 12px;
+            font-size: 13px;
+            text-align: center;
+            min-height: 18px;
+        }
+    </style>
+
+    <div id="authModal" class="auth-overlay" onclick="if(event.target === this) closeAuthModal()">
+        <div class="auth-box">
+            <button type="button" class="auth-close" onclick="closeAuthModal()">&times;</button>
+
+            <div class="auth-tabs">
+                <button type="button" id="tabLogin" class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+                <button type="button" id="tabRegister" class="auth-tab" onclick="switchAuthTab('register')">Sign Up</button>
+            </div>
+
+            <form id="authForm" onsubmit="submitAuthForm(event)">
+                <div class="auth-field" id="nameField" style="display: none;">
+                    <label>Full Name</label>
+                    <input type="text" id="authName" placeholder="Enter your name">
+                </div>
+
+                <div class="auth-field">
+                    <label>Email</label>
+                    <input type="email" id="authEmail" placeholder="example@gmail.com" required>
+                </div>
+
+                <div class="auth-field">
+                    <label>Password</label>
+                    <input type="password" id="authPassword" placeholder="Minimum 6 characters" required>
+                </div>
+
+                <button type="submit" id="authSubmitBtn" class="auth-submit">Login</button>
+                <div id="authMsg" class="auth-msg"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let authMode = "login";
+
+        function openAuthModal(mode = "login") {
+            const modal = document.getElementById("authModal");
+            if (modal.parentElement !== document.documentElement) {
+                document.documentElement.appendChild(modal);
+            }
+            switchAuthTab(mode);
+            modal.classList.add("active");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeAuthModal() {
+            document.getElementById("authModal").classList.remove("active");
+            document.getElementById("authMsg").textContent = "";
+            document.body.style.overflow = "";
+        }
+
+        function switchAuthTab(mode) {
+            authMode = mode;
+            const isRegister = mode === "register";
+            document.getElementById("nameField").style.display = isRegister ? "block" : "none";
+            document.getElementById("authName").required = isRegister;
+            document.getElementById("authSubmitBtn").textContent = isRegister ? "Create Account" : "Login";
+            document.getElementById("tabLogin").classList.toggle("active", !isRegister);
+            document.getElementById("tabRegister").classList.toggle("active", isRegister);
+            document.getElementById("authMsg").textContent = "";
+        }
+
+        async function submitAuthForm(e) {
+            e.preventDefault();
+            const msgBox = document.getElementById("authMsg");
+            msgBox.style.color = "#94a3b8";
+            msgBox.textContent = "Please wait...";
+
+            const payload = {
+                email: document.getElementById("authEmail").value.trim(),
+                password: document.getElementById("authPassword").value
+            };
+            if (authMode === "register") {
+                payload.name = document.getElementById("authName").value.trim();
+            }
+
+            const endpoint = authMode === "register" ? "/api/register" : "/api/login";
+
+            try {
+                const res = await fetch(endpoint, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    msgBox.style.color = "#12d39a";
+                    msgBox.textContent = data.message;
+                    setTimeout(() => window.location.reload(), 600);
+                } else {
+                    msgBox.style.color = "#f87171";
+                    msgBox.textContent = data.message || "Error occurred.";
+                }
+            } catch (err) {
+                msgBox.style.color = "#f87171";
+                msgBox.textContent = "Server se connect nahi ho paya.";
+            }
+        }
+
+        async function logoutUser() {
+            await fetch("/api/logout", { method: "POST" });
+            window.location.reload();
+        }
+
+        {% if not current_user %}
+        window.addEventListener("DOMContentLoaded", function () {
+            setTimeout(() => {
+                openAuthModal("login");
+            }, 400);
+        });
+        {% endif %}
+    </script>
+</body>
+</html>

@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Feedback | AarogyaDrishti</title>
+
+
+    <!-- ======================================================
+         COMMON WEBSITE CSS
+    ======================================================= -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+
+    <!-- ======================================================
+         FEEDBACK PAGE CSS
+    ======================================================= -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/feedback.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ======================================================
+         NAVBAR
+    ======================================================= -->
+
+    <header
+        class="navbar"
+        id="navbar"
+    >
+
+        <div class="nav-container">
+
+
+            <!-- BRAND -->
+
+            <a
+                href="{{ url_for('home') }}"
+                class="brand"
+            >
+
+                <div class="brand-logo-wrap">
+
+                    <img
+                        src="{{ url_for('static', filename='images/AarogyaDrishti-logo.png') }}"
+                        alt="AarogyaDrishti Logo"
+                        class="brand-logo"
+                    >
+
+                </div>
+
+
+                <div class="brand-text">
+
+                    <span class="brand-name">
+                        AarogyaDrishti
+                    </span>
+
+                    <span class="brand-tagline">
+                        AI • Brain Health
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- DESKTOP NAVIGATION -->
+
+            <nav class="desktop-nav">
+
+                <a
+                    href="{{ url_for('home') }}"
+                    class="nav-link"
+                >
+                    Home
+                </a>
+
+
+                <a
+                    href="{{ url_for('predict') }}"
+                    class="nav-link"
+                >
+                    Prediction
+                </a>
+
+
+                <a
+                    href="{{ url_for('history') }}"
+                    class="nav-link"
+                >
+                    History
+                </a>
+
+
+                <a
+                    href="{{ url_for('about') }}"
+                    class="nav-link"
+                >
+                    About
+                </a>
+
+
+                <a
+                    href="{{ url_for('feedback') }}"
+                    class="nav-link active"
+                >
+                    Feedback
+                </a>
+
+            </nav>
+
+
+            <!-- NAV ACTIONS -->
+
+            <div class="nav-actions">
+
+
+                <!-- THEME TOGGLE -->
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Toggle theme"
+                    title="Toggle dark and light mode"
+                >
+
+                    <span class="theme-icon moon-icon">
+                        ☾
+                    </span>
+
+                    <span class="theme-icon sun-icon">
+                        ☀
+                    </span>
+
+
+                    <span class="toggle-track">
+
+                        <span class="toggle-thumb"></span>
+
+                    </span>
+
+                </button>
+
+
+                <!-- ANALYZE MRI -->
+
+                <a
+                    href="{{ url_for('predict') }}"
+                    class="nav-cta"
+                >
+
+                    <span>
+                        Analyze MRI
+                    </span>
+
+                    <span class="cta-arrow">
+                        ↗
+                    </span>
+
+                </a>
+
+
+                <!-- MOBILE MENU BUTTON -->
+
+                <button
+                    class="mobile-menu-btn"
+                    id="mobileMenuBtn"
+                    type="button"
+                    aria-label="Open navigation"
+                >
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             MOBILE NAVIGATION
+        =================================================== -->
+
+        <div
+            class="mobile-nav"
+            id="mobileNav"
+        >
+
+            <a
+                href="{{ url_for('home') }}"
+                class="mobile-nav-link"
+            >
+                Home
+            </a>
+
+
+            <a
+                href="{{ url_for('predict') }}"
+                class="mobile-nav-link"
+            >
+                Prediction
+            </a>
+
+
+            <a
+                href="{{ url_for('history') }}"
+                class="mobile-nav-link"
+            >
+                History
+            </a>
+
+
+            <a
+                href="{{ url_for('about') }}"
+                class="mobile-nav-link"
+            >
+                About
+            </a>
+
+
+            <a
+                href="{{ url_for('feedback') }}"
+                class="mobile-nav-link"
+            >
+                Feedback
+            </a>
+
+
+            <a
+                href="{{ url_for('predict') }}"
+                class="mobile-nav-cta"
+            >
+
+                Analyze MRI
+
+                <span>
+                    ↗
+                </span>
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ======================================================
+         MAIN FEEDBACK CONTENT
+    ======================================================= -->
+
+    <main>
+
+
+        <div class="feedback-container">
+
+
+            <!-- ==================================================
+                 PAGE HEADER
+            =================================================== -->
+
+            <div class="feedback-header">
+
+                <h1>
+                    Feedback
+                </h1>
+
+                <p>
+                    Help us make AarogyaDrishti better.
+                </p>
+
+            </div>
+
+
+            <!-- ==================================================
+                 FEEDBACK CARD
+            =================================================== -->
+
+            <div class="feedback-card">
+
+
+                <!-- ==================================================
+                     ERROR MESSAGE
+                =================================================== -->
+
+                {% if error %}
+
+                <div
+                    class="error-message"
+                    role="alert"
+                >
+
+                    {{ error }}
+
+                </div>
+
+                {% endif %}
+
+
+                <!-- ==================================================
+                     SUCCESS MESSAGE
+                =================================================== -->
+
+                {% if success %}
+
+                <div
+                    class="success-message"
+                    role="status"
+                >
+
+                    {{ success }}
+
+                </div>
+
+                {% endif %}
+
+
+                <!-- ==================================================
+                     FEEDBACK FORM
+                =================================================== -->
+
+                <form
+                    id="feedbackForm"
+                    method="POST"
+                    action="{{ url_for('feedback') }}"
+                >
+
+
+                    <!-- ==================================================
+                         NAME
+                    =================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your name"
+                            value="{{ request.form.get('name', '') }}"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- ==================================================
+                         EMAIL
+                    =================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            value="{{ request.form.get('email', '') }}"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- ==================================================
+                         PHONE
+                    =================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone Number (Optional)
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Enter your phone number"
+                            value="{{ request.form.get('phone', '') }}"
+                            autocomplete="tel"
+                        >
+
+                    </div>
+
+
+                    <!-- ==================================================
+                         OVERALL EXPERIENCE
+                    =================================================== -->
+
+                    <div class="form-group">
+
+                        <label>
+                            How was your overall experience?
+                        </label>
+
+
+                        <div
+                            class="rating"
+                            role="radiogroup"
+                            aria-label="Overall experience rating"
+                        >
+
+
+                            <!-- 1 STAR -->
+
+                            <input
+                                type="radio"
+                                id="star1"
+                                name="rating"
+                                value="1"
+                                {% if request.form.get('rating') == '1' %}checked{% endif %}
+                                required
+                            >
+
+                            <label
+                                for="star1"
+                                title="1 Star"
+                                aria-label="1 Star"
+                            >
+                                ★
+                            </label>
+
+
+                            <!-- 2 STARS -->
+
+                            <input
+                                type="radio"
+                                id="star2"
+                                name="rating"
+                                value="2"
+                                {% if request.form.get('rating') == '2' %}checked{% endif %}
+                            >
+
+                            <label
+                                for="star2"
+                                title="2 Stars"
+                                aria-label="2 Stars"
+                            >
+                                ★
+                            </label>
+
+
+                            <!-- 3 STARS -->
+
+                            <input
+                                type="radio"
+                                id="star3"
+                                name="rating"
+                                value="3"
+                                {% if request.form.get('rating') == '3' %}checked{% endif %}
+                            >
+
+                            <label
+                                for="star3"
+                                title="3 Stars"
+                                aria-label="3 Stars"
+                            >
+                                ★
+                            </label>
+
+
+                            <!-- 4 STARS -->
+
+                            <input
+                                type="radio"
+                                id="star4"
+                                name="rating"
+                                value="4"
+                                {% if request.form.get('rating') == '4' %}checked{% endif %}
+                            >
+
+                            <label
+                                for="star4"
+                                title="4 Stars"
+                                aria-label="4 Stars"
+                            >
+                                ★
+                            </label>
+
+
+                            <!-- 5 STARS -->
+
+                            <input
+                                type="radio"
+                                id="star5"
+                                name="rating"
+                                value="5"
+                                {% if request.form.get('rating') == '5' %}checked{% endif %}
+                            >
+
+                            <label
+                                for="star5"
+                                title="5 Stars"
+                                aria-label="5 Stars"
+                            >
+                                ★
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ==================================================
+                         FEEDBACK CATEGORY
+                    =================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="category">
+                            Feedback Category
+                        </label>
+
+
+                        <select
+                            id="category"
+                            name="category"
+                            required
+                        >
+
+                            <option
+                                value=""
+                                {% if not request.form.get('category') %}
+                                    selected
+                                {% endif %}
+                            >
+                                Select a category
+                            </option>
+
+
+                            <option
+                                value="website"
+                                {% if request.form.get('category') == 'website' %}
+                                    selected
+                                {% endif %}
+                            >
+                                🖥️ Website Experience
+                            </option>
+
+
+                            <option
+                                value="design"
+                                {% if request.form.get('category') == 'design' %}
+                                    selected
+                                {% endif %}
+                            >
+                                🎨 UI / Design
+                            </option>
+
+
+                            <option
+                                value="performance"
+                                {% if request.form.get('category') == 'performance' %}
+                                    selected
+                                {% endif %}
+                            >
+                                ⚡ Performance
+                            </option>
+
+
+                            <option
+                                value="prediction"
+                                {% if request.form.get('category') == 'prediction' %}
+                                    selected
+                                {% endif %}
+                            >
+                                🤖 Prediction / Result
+                            </option>
+
+
+                            <option
+                                value="mobile"
+                                {% if request.form.get('category') == 'mobile' %}
+                                    selected
+                                {% endif %}
+                            >
+                                📱 Mobile Experience
+                            </option>
+
+
+                            <option
+                                value="suggestion"
+                                {% if request.form.get('category') == 'suggestion' %}
+                                    selected
+                                {% endif %}
+                            >
+                                💡 Suggestions
+                            </option>
+
+
+                            <option
+                                value="problem"
+                                {% if request.form.get('category') == 'problem' %}
+                                    selected
+                                {% endif %}
+                            >
+                                🐛 Report a Problem
+                            </option>
+
+
+                            <option
+                                value="other"
+                                {% if request.form.get('category') == 'other' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ==================================================
+                         DETAILED FEEDBACK
+                    =================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="feedback">
+                            Detailed Feedback
+                        </label>
+
+
+                        <textarea
+                            id="feedback"
+                            name="feedback"
+                            placeholder="Please tell us about your experience or suggestions..."
+                            required
+                        >{{ request.form.get('feedback', '') }}</textarea>
+
+                    </div>
+
+
+                    <!-- ==================================================
+                         RECOMMENDATION
+                    =================================================== -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Would you recommend AarogyaDrishti to others?
+                        </label>
+
+
+                        <div
+                            class="recommendation"
+                            role="radiogroup"
+                            aria-label="Recommendation"
+                        >
+
+
+                            <!-- YES -->
+
+                            <label>
+
+                                <input
+                                    type="radio"
+                                    name="recommendation"
+                                    value="yes"
+                                    {% if request.form.get('recommendation') == 'yes' %}checked{% endif %}
+                                    required
+                                >
+
+                                <span>
+                                    Yes 👍
+                                </span>
+
+                            </label>
+
+
+                            <!-- MAYBE -->
+
+                            <label>
+
+                                <input
+                                    type="radio"
+                                    name="recommendation"
+                                    value="maybe"
+                                    {% if request.form.get('recommendation') == 'maybe' %}checked{% endif %}
+                                >
+
+                                <span>
+                                    Maybe 🤔
+                                </span>
+
+                            </label>
+
+
+                            <!-- NO -->
+
+                            <label>
+
+                                <input
+                                    type="radio"
+                                    name="recommendation"
+                                    value="no"
+                                    {% if request.form.get('recommendation') == 'no' %}checked{% endif %}
+                                >
+
+                                <span>
+                                    No 👎
+                                </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ==================================================
+                         IMPROVEMENT
+                    =================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="improvement">
+                            What would you like us to improve?
+                        </label>
+
+
+                        <textarea
+                            id="improvement"
+                            name="improvement"
+                            placeholder="Tell us what we can improve..."
+                        >{{ request.form.get('improvement', '') }}</textarea>
+
+                    </div>
+
+
+                    <!-- ==================================================
+                         SUBMIT BUTTON
+                    =================================================== -->
+
+                    <button
+                        type="submit"
+                        class="submit-btn"
+                    >
+
+                        🚀 Submit Feedback
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ======================================================
+         FOOTER
+    ======================================================= -->
+
+    <footer class="footer">
+
+        <div class="section-container">
+
+            <div class="footer-main">
+
+
+                <!-- FOOTER BRAND -->
+
+                <div class="footer-brand">
+
+                    <a
+                        href="{{ url_for('home') }}"
+                        class="brand"
+                    >
+
+                        <div class="brand-logo-wrap">
+
+                            <img
+                                src="{{ url_for('static', filename='images/AarogyaDrishti-logo.png') }}"
+                                alt="AarogyaDrishti"
+                                class="brand-logo"
+                            >
+
+                        </div>
+
+
+                        <div class="brand-text">
+
+                            <span class="brand-name">
+                                AarogyaDrishti
+                            </span>
+
+                            <span class="brand-tagline">
+                                AI • Brain Health
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                    <p>
+                        Intelligent vision for better brain-health awareness.
+                    </p>
+
+                </div>
+
+
+                <!-- FOOTER LINKS -->
+
+                <div class="footer-links">
+
+
+                    <!-- EXPLORE -->
+
+                    <div class="footer-column">
+
+                        <span class="footer-heading">
+                            Explore
+                        </span>
+
+
+                        <a href="{{ url_for('home') }}">
+                            Home
+                        </a>
+
+
+                        <a href="{{ url_for('predict') }}">
+                            Prediction
+                        </a>
+
+
+                        <a href="{{ url_for('history') }}">
+                            History
+                        </a>
+
+
+                        <a href="{{ url_for('about') }}">
+                            About
+                        </a>
+
+
+                        <a href="{{ url_for('feedback') }}">
+                            Feedback
+                        </a>
+
+                    </div>
+
+
+                    <!-- PLATFORM -->
+
+                    <div class="footer-column">
+
+                        <span class="footer-heading">
+                            Platform
+                        </span>
+
+
+                        <a href="{{ url_for('home') }}#how-it-works">
+                            How It Works
+                        </a>
+
+
+                        <a href="{{ url_for('predict') }}">
+                            AI Analysis
+                        </a>
+
+
+                        <a href="{{ url_for('predict') }}">
+                            Generate Report
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER BOTTOM -->
+
+            <div class="footer-bottom">
+
+                <span>
+                    © 2026 AarogyaDrishti. Built with AI & care.
+                </span>
+
+
+                <span>
+                    VGG19 • Deep Learning • Brain MRI
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ======================================================
+         COMMON JAVASCRIPT
+    ======================================================= -->
+
+    <script
+        src="{{ url_for('static', filename='js/main.js') }}"
+    ></script>
+
+
+    <!-- ======================================================
+         FEEDBACK PAGE JAVASCRIPT
+    ======================================================= -->
+
+    <script
+        src="{{ url_for('static', filename='js/feedback.js') }}"
+    ></script>
+
+
+</body>
+
+</html>

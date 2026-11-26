@@ -1,0 +1,2171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="AarogyaDrishti AI-assisted brain MRI analysis report."
+    >
+
+    <title>AarogyaDrishti | Medical AI Report</title>
+
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+
+    <!-- =====================================================
+         GLOBAL CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+
+    <!-- =====================================================
+         REPORT CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/report.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         PAGE LOADER
+    ====================================================== -->
+
+    <div
+        class="page-loader"
+        id="pageLoader"
+    >
+
+        <div class="loader-orbit">
+
+            <div class="loader-core">
+                AD
+            </div>
+
+        </div>
+
+        <span>
+            Preparing your health report
+        </span>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         BACKGROUND
+    ====================================================== -->
+
+    <div class="report-background">
+
+        <div class="medical-grid"></div>
+
+        <div class="report-orb orb-green"></div>
+
+        <div class="report-orb orb-cyan"></div>
+
+        <div class="report-orb orb-blue"></div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <header
+        class="navbar"
+        id="navbar"
+    >
+
+        <div class="nav-container">
+
+
+            <!-- BRAND -->
+
+            <a
+                href="{{ url_for('home') }}"
+                class="brand"
+            >
+
+                <div class="brand-logo-wrap">
+
+                    <img
+                        src="{{ url_for('static', filename='images/logo.png') }}"
+                        alt="AarogyaDrishti Logo"
+                        class="brand-logo"
+                    >
+
+                </div>
+
+
+                <div class="brand-text">
+
+                    <span class="brand-name">
+                        AarogyaDrishti
+                    </span>
+
+                    <span class="brand-tagline">
+                        Medical AI Intelligence
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- DESKTOP NAV -->
+
+            <nav class="desktop-nav">
+
+                <a
+                    href="{{ url_for('home') }}"
+                    class="nav-link"
+                >
+                    Home
+                </a>
+
+
+                <a
+                    href="{{ url_for('predict') }}"
+                    class="nav-link"
+                >
+                    Prediction
+                </a>
+
+
+                <a
+                    href="{{ url_for('history') }}"
+                    class="nav-link"
+                >
+                    History
+                </a>
+
+
+                <a
+                    href="{{ url_for('about') }}"
+                    class="nav-link"
+                >
+                    About
+                </a>
+
+            </nav>
+
+
+
+            <!-- NAV ACTIONS -->
+
+            <div class="nav-actions">
+
+
+                <!-- THEME TOGGLE -->
+
+                <button
+                    type="button"
+                    class="theme-toggle"
+                    id="themeToggle"
+                    aria-label="Toggle dark and light theme"
+                >
+
+                    <div class="toggle-track"></div>
+
+                    <div class="toggle-thumb"></div>
+
+                    <i
+                        class="fa-solid fa-sun theme-icon sun-icon"
+                    ></i>
+
+                    <i
+                        class="fa-solid fa-moon theme-icon moon-icon"
+                    ></i>
+
+                </button>
+
+
+                <!-- MOBILE MENU -->
+
+                <button
+                    type="button"
+                    class="mobile-menu-btn"
+                    id="mobileMenuBtn"
+                    aria-label="Open navigation menu"
+                >
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MOBILE NAV -->
+
+        <nav
+            class="mobile-nav"
+            id="mobileNav"
+        >
+
+            <a
+                href="{{ url_for('home') }}"
+                class="mobile-nav-link"
+            >
+
+                <i class="fa-solid fa-house"></i>
+
+                Home
+
+            </a>
+
+
+            <a
+                href="{{ url_for('predict') }}"
+                class="mobile-nav-link"
+            >
+
+                <i class="fa-solid fa-brain"></i>
+
+                Prediction
+
+            </a>
+
+
+            <a
+                href="{{ url_for('history') }}"
+                class="mobile-nav-link"
+            >
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                History
+
+            </a>
+
+
+            <a
+                href="{{ url_for('about') }}"
+                class="mobile-nav-link"
+            >
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                About
+
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN REPORT
+    ====================================================== -->
+
+    <main class="report-page">
+
+
+        <!-- =================================================
+             REPORT HERO
+        ================================================== -->
+
+        <section class="report-hero">
+
+            <div class="report-container">
+
+                <div class="report-hero-content">
+
+
+                    <div class="report-badge">
+
+                        <span class="report-live-dot"></span>
+
+                        AI ANALYSIS COMPLETE
+
+                    </div>
+
+
+                    <h1>
+
+                        Your Brain Health
+
+                        <span>
+                            Intelligence Report
+                        </span>
+
+                    </h1>
+
+
+                    <p>
+
+                        AarogyaDrishti has analyzed the uploaded
+                        MRI image using its trained deep learning
+                        model and prepared an AI-assisted report.
+
+                    </p>
+
+
+                    <div class="report-meta">
+
+
+                        <span>
+
+                            <i class="fa-regular fa-calendar"></i>
+
+                            <span>
+                                {{ report_date | default('Today') }}
+                            </span>
+
+                        </span>
+
+
+                        <span class="meta-divider">
+                            •
+                        </span>
+
+
+                        <span>
+
+                            <i class="fa-regular fa-clock"></i>
+
+                            <span>
+                                {{ report_time | default('--:--') }}
+                            </span>
+
+                        </span>
+
+
+                        <span class="meta-divider">
+                            •
+                        </span>
+
+
+                        <span class="secure-status">
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                            AI Report
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             REPORT CONTENT
+        ================================================== -->
+
+        <section class="report-content">
+
+            <div class="report-container">
+
+
+                <!-- =================================================
+                     PATIENT + RESULT
+                ================================================== -->
+
+                <div class="top-report-grid">
+
+
+                    <!-- PATIENT -->
+
+                    <article class="report-card patient-card">
+
+
+                        <div class="card-header">
+
+
+                            <div class="card-icon green-icon">
+
+                                <i class="fa-solid fa-user"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="card-eyebrow">
+                                    PATIENT PROFILE
+                                </span>
+
+                                <h2>
+                                    Patient Information
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="patient-details">
+
+
+                            <div class="patient-detail">
+
+                                <span>
+                                    Full Name
+                                </span>
+
+                                <strong>
+                                    {{ patient_name | default('Patient') }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="patient-detail">
+
+                                <span>
+                                    Age
+                                </span>
+
+                                <strong>
+                                    {{ patient_age | default('--') }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="patient-detail">
+
+                                <span>
+                                    Gender
+                                </span>
+
+                                <strong>
+                                    {{ patient_gender | default('--') }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="patient-detail">
+
+                                <span>
+                                    Report ID
+                                </span>
+
+                                <strong class="report-id">
+                                    {{ report_id | default('AD-000001') }}
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- RESULT -->
+
+                    <article
+                        class="report-card result-card {% if prediction == 'Yes Brain Tumor' %}result-positive{% else %}result-negative{% endif %}"
+                    >
+
+
+                        <div class="result-glow"></div>
+
+
+                        <div class="result-content">
+
+
+                            <div class="result-top">
+
+                                <div>
+
+                                    <span class="card-eyebrow">
+                                        AI PREDICTION
+                                    </span>
+
+                                    <h2>
+                                        Analysis Result
+                                    </h2>
+
+                                </div>
+
+
+                                <div class="result-chip">
+
+                                    <i class="fa-solid fa-microchip"></i>
+
+                                    VGG19 AI
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- MAIN RESULT -->
+
+                            <div class="result-main">
+
+
+                                <div class="result-icon">
+
+                                    {% if prediction == 'Yes Brain Tumor' %}
+
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                                    {% else %}
+
+                                        <i class="fa-solid fa-circle-check"></i>
+
+                                    {% endif %}
+
+                                </div>
+
+
+
+                                <div class="result-text">
+
+
+                                    <span>
+                                        DETECTED CLASS
+                                    </span>
+
+
+                                    <strong id="predictionClass">
+
+                                        {% if prediction == 'Yes Brain Tumor' %}
+
+                                            Tumorous
+
+                                        {% else %}
+
+                                            Non-Tumorous
+
+                                        {% endif %}
+
+                                    </strong>
+
+
+                                    <small>
+
+                                        {% if prediction == 'Yes Brain Tumor' %}
+
+                                            AI model indicates features
+                                            associated with the
+                                            tumorous class.
+
+                                        {% else %}
+
+                                            AI model indicates the
+                                            non-tumorous class for
+                                            this analyzed image.
+
+                                        {% endif %}
+
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- CONFIDENCE -->
+
+                            <div class="confidence-section">
+
+
+                                <div class="confidence-heading">
+
+                                    <span>
+                                        MODEL CONFIDENCE
+                                    </span>
+
+
+                                    <strong id="confidenceValue">
+
+                                        {{ confidence | default(90) }}%
+
+                                    </strong>
+
+                                </div>
+
+
+
+                                <div class="confidence-bar">
+
+                                    <div
+                                        class="confidence-fill"
+                                        id="confidenceFill"
+                                        style="width: {{ confidence | default(90) }}%;"
+                                    ></div>
+
+                                </div>
+
+
+
+                                <div class="confidence-note">
+
+                                    <i class="fa-solid fa-circle-info"></i>
+
+                                    Confidence represents the
+                                    model prediction probability
+                                    and is not a clinical diagnosis.
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     MRI ANALYSIS
+                ================================================== -->
+
+                <div class="section-heading">
+
+
+                    <div>
+
+                        <span>
+                            VISUAL ANALYSIS
+                        </span>
+
+                        <h2>
+                            MRI Examination
+                        </h2>
+
+                    </div>
+
+
+                    <div class="section-line"></div>
+
+                </div>
+
+
+
+                <div class="mri-analysis-card report-card">
+
+
+                    <!-- MRI VIEWER -->
+
+                    <div class="mri-viewer">
+
+
+                        <div class="viewer-topbar">
+
+                            <span>
+
+                                <i class="fa-solid fa-circle"></i>
+
+                                MRI IMAGE
+
+                            </span>
+
+
+                            <span>
+                                AI VISION INPUT
+                            </span>
+
+                        </div>
+
+
+
+                        <div class="mri-image-area">
+
+
+                            {% if image %}
+
+                                <img
+                                    src="{{ image }}"
+                                    alt="Uploaded Brain MRI"
+                                    class="mri-image"
+                                    id="mriReportImage"
+                                >
+
+                            {% elif image_path %}
+
+                                <img
+                                    src="{{ url_for('static', filename=image_path) }}"
+                                    alt="Uploaded Brain MRI"
+                                    class="mri-image"
+                                    id="mriReportImage"
+                                >
+
+                            {% else %}
+
+                                <div class="mri-placeholder">
+
+                                    <i class="fa-solid fa-brain"></i>
+
+                                    <span>
+                                        MRI Image Preview
+                                    </span>
+
+                                </div>
+
+                            {% endif %}
+
+
+
+                            <div class="scan-line"></div>
+
+
+                            <div class="corner corner-tl"></div>
+
+                            <div class="corner corner-tr"></div>
+
+                            <div class="corner corner-bl"></div>
+
+                            <div class="corner corner-br"></div>
+
+
+                            <div class="viewer-label">
+                                AI INPUT
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="viewer-footer">
+
+
+                            <span>
+                                Resolution:
+                                240 × 240
+                            </span>
+
+
+                            <span>
+                                MRI Analysis
+                            </span>
+
+
+                            <span>
+                                AarogyaDrishti AI
+                            </span>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PIPELINE -->
+
+                    <div class="analysis-details">
+
+
+                        <div class="analysis-title">
+
+                            <span>
+                                MODEL PIPELINE
+                            </span>
+
+                            <h3>
+                                Deep Learning Analysis
+                            </h3>
+
+                        </div>
+
+
+
+                        <div class="analysis-step">
+
+
+                            <div class="analysis-step-icon">
+
+                                <i class="fa-solid fa-image"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Image Preprocessing
+                                </strong>
+
+                                <span>
+                                    MRI image prepared and
+                                    normalized for AI analysis.
+                                </span>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-check step-check"></i>
+
+                        </div>
+
+
+
+                        <div class="analysis-connector"></div>
+
+
+
+                        <div class="analysis-step">
+
+
+                            <div class="analysis-step-icon">
+
+                                <i class="fa-solid fa-network-wired"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    VGG19 Feature Extraction
+                                </strong>
+
+                                <span>
+                                    Deep visual features extracted
+                                    from the MRI image.
+                                </span>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-check step-check"></i>
+
+                        </div>
+
+
+
+                        <div class="analysis-connector"></div>
+
+
+
+                        <div class="analysis-step">
+
+
+                            <div class="analysis-step-icon">
+
+                                <i class="fa-solid fa-brain"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Classification
+                                </strong>
+
+                                <span>
+                                    Image classified into the
+                                    trained diagnostic classes.
+                                </span>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-check step-check"></i>
+
+                        </div>
+
+
+
+                        <div class="analysis-connector"></div>
+
+
+
+                        <div class="analysis-step">
+
+
+                            <div class="analysis-step-icon">
+
+                                <i class="fa-solid fa-chart-simple"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Confidence Evaluation
+                                </strong>
+
+                                <span>
+                                    Prediction probability calculated
+                                    by the trained model.
+                                </span>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-check step-check"></i>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     RECOMMENDATIONS
+                ================================================== -->
+
+                <div class="section-heading recommendation-heading">
+
+
+                    <div>
+
+                        <span>
+                            PERSONALIZED GUIDANCE
+                        </span>
+
+                        <h2>
+                            Wellness Recommendations
+                        </h2>
+
+                    </div>
+
+
+                    <div class="section-line"></div>
+
+                </div>
+
+
+
+                {% if prediction == 'Yes Brain Tumor' %}
+
+
+                    <!-- =============================================
+                         TUMOROUS
+                    ============================================== -->
+
+                    <div class="recommendation-grid">
+
+
+                        <article class="recommendation-card">
+
+
+                            <div class="recommendation-icon nutrition-icon">
+
+                                <i class="fa-solid fa-leaf"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    01 • NUTRITION
+                                </span>
+
+                                <h3>
+                                    Supportive Nutrition
+                                </h3>
+
+                                <p>
+                                    Focus on a balanced diet with
+                                    vegetables, fruits, whole grains,
+                                    legumes and adequate hydration.
+                                </p>
+
+
+                                <ul>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Prefer nutrient-rich foods.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Maintain adequate hydration.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Limit highly processed foods.
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <article class="recommendation-card">
+
+
+                            <div class="recommendation-icon activity-icon">
+
+                                <i class="fa-solid fa-person-walking"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    02 • ACTIVITY
+                                </span>
+
+                                <h3>
+                                    Gentle Physical Activity
+                                </h3>
+
+                                <p>
+                                    Physical activity should be based
+                                    on individual condition and medical
+                                    advice.
+                                </p>
+
+
+                                <ul>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Prefer gentle movement when appropriate.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Avoid strenuous activity without guidance.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Take adequate rest.
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <article class="recommendation-card">
+
+
+                            <div class="recommendation-icon sleep-icon">
+
+                                <i class="fa-solid fa-moon"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    03 • LIFESTYLE
+                                </span>
+
+                                <h3>
+                                    Rest & Recovery
+                                </h3>
+
+                                <p>
+                                    Consistent sleep and a calm daily
+                                    routine can support overall wellbeing.
+                                </p>
+
+
+                                <ul>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Maintain a regular sleep schedule.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Reduce unnecessary stress.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Follow prescribed medical advice.
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <article class="recommendation-card">
+
+
+                            <div class="recommendation-icon doctor-icon">
+
+                                <i class="fa-solid fa-user-doctor"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    04 • MEDICAL CARE
+                                </span>
+
+                                <h3>
+                                    Professional Follow-Up
+                                </h3>
+
+                                <p>
+                                    A positive AI result should be
+                                    reviewed by a qualified medical
+                                    professional.
+                                </p>
+
+
+                                <ul>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Consult a qualified doctor.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Follow recommended investigations.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Do not rely on AI prediction alone.
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </article>
+
+
+                    </div>
+
+
+                {% else %}
+
+
+                    <!-- =============================================
+                         NON-TUMOROUS
+                    ============================================== -->
+
+                    <div class="recommendation-grid">
+
+
+                        <article class="recommendation-card">
+
+
+                            <div class="recommendation-icon nutrition-icon">
+
+                                <i class="fa-solid fa-apple-whole"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    01 • NUTRITION
+                                </span>
+
+                                <h3>
+                                    Brain-Friendly Nutrition
+                                </h3>
+
+                                <p>
+                                    Maintain a balanced eating pattern
+                                    with vegetables, fruits, whole grains
+                                    and legumes.
+                                </p>
+
+
+                                <ul>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Include a variety of vegetables.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Stay adequately hydrated.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Limit excessive processed foods.
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <article class="recommendation-card">
+
+
+                            <div class="recommendation-icon activity-icon">
+
+                                <i class="fa-solid fa-person-running"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    02 • ACTIVITY
+                                </span>
+
+                                <h3>
+                                    Stay Physically Active
+                                </h3>
+
+                                <p>
+                                    Regular physical activity can support
+                                    general cardiovascular and overall health.
+                                </p>
+
+
+                                <ul>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Include regular walking or activity.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Avoid prolonged inactivity.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Choose sustainable activities.
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <article class="recommendation-card">
+
+
+                            <div class="recommendation-icon sleep-icon">
+
+                                <i class="fa-solid fa-bed"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    03 • LIFESTYLE
+                                </span>
+
+                                <h3>
+                                    Healthy Daily Routine
+                                </h3>
+
+                                <p>
+                                    A consistent routine with adequate
+                                    sleep, activity and stress management
+                                    supports overall wellbeing.
+                                </p>
+
+
+                                <ul>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Maintain consistent sleep.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Manage daily stress.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Maintain healthy habits.
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <article class="recommendation-card">
+
+
+                            <div class="recommendation-icon doctor-icon">
+
+                                <i class="fa-solid fa-stethoscope"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    04 • PREVENTION
+                                </span>
+
+                                <h3>
+                                    Continue Regular Care
+                                </h3>
+
+                                <p>
+                                    The AI result does not replace routine
+                                    healthcare or professional evaluation.
+                                </p>
+
+
+                                <ul>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Continue routine health checkups.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Discuss concerning symptoms with a doctor.
+                                    </li>
+
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Seek medical care when necessary.
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </article>
+
+
+                    </div>
+
+
+                {% endif %}
+
+
+
+                <!-- =================================================
+                     DR VOICE
+                ================================================== -->
+
+                <div class="voice-section">
+
+
+                    <div class="section-heading">
+
+
+                        <div>
+
+                            <span>
+                                AI HEALTH ASSISTANT
+                            </span>
+
+                            <h2>
+                                Dr. Voice
+                            </h2>
+
+                        </div>
+
+
+                        <div class="section-line"></div>
+
+                    </div>
+
+
+
+                    <div class="voice-card report-card">
+
+
+                        <div class="voice-visual">
+
+
+                            <div class="voice-orbit orbit-one"></div>
+
+                            <div class="voice-orbit orbit-two"></div>
+
+
+                            <div class="doctor-avatar">
+
+                                <div class="avatar-glow"></div>
+
+                                <i class="fa-solid fa-user-doctor"></i>
+
+                            </div>
+
+
+                            <div class="voice-pulse pulse-one"></div>
+
+                            <div class="voice-pulse pulse-two"></div>
+
+
+                        </div>
+
+
+
+                        <div class="voice-content">
+
+
+                            <span class="card-eyebrow">
+                                BILINGUAL HEALTH EXPLANATION
+                            </span>
+
+
+                            <h3>
+                                Let Dr. Voice explain your report
+                            </h3>
+
+
+                            <p>
+                                Listen to a simple explanation of
+                                your AI result and key recommendations.
+                            </p>
+
+
+
+                            <div class="language-selector">
+
+
+                                <button
+                                    type="button"
+                                    class="language-btn active"
+                                    data-language="en"
+                                    id="voiceEnglish"
+                                >
+
+                                    <span>
+                                        🇬🇧
+                                    </span>
+
+                                    English
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="language-btn"
+                                    data-language="hi"
+                                    id="voiceHindi"
+                                >
+
+                                    <span>
+                                        🇮🇳
+                                    </span>
+
+                                    हिन्दी
+
+                                </button>
+
+
+                            </div>
+
+
+
+                            <div class="voice-controls">
+
+
+                                <button
+                                    type="button"
+                                    class="voice-play-btn"
+                                    id="voicePlayBtn"
+                                >
+
+                                    <i class="fa-solid fa-play"></i>
+
+                                    <span>
+                                        Listen to Report
+                                    </span>
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="voice-stop-btn"
+                                    id="voiceStopBtn"
+                                >
+
+                                    <i class="fa-solid fa-stop"></i>
+
+                                </button>
+
+
+                            </div>
+
+
+
+                            <div
+                                class="voice-status"
+                                id="voiceStatus"
+                            >
+
+                                <span class="voice-status-dot"></span>
+
+                                <span id="voiceStatusText">
+                                    Ready to speak
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACTIONS
+                ================================================== -->
+
+                <section class="report-actions-section">
+
+
+                    <div class="report-action-header">
+
+
+                        <div>
+
+                            <span>
+                                YOUR REPORT
+                            </span>
+
+                            <h2>
+                                Save Your Health Summary
+                            </h2>
+
+                        </div>
+
+
+                        <p>
+                            Generate, print or start a new
+                            MRI analysis.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="action-grid">
+
+
+                        <button
+                            type="button"
+                            class="action-card primary-action"
+                            id="downloadReportBtn"
+                        >
+
+
+                            <div class="action-card-icon">
+
+                                <i class="fa-solid fa-file-pdf"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Generate Report
+                                </strong>
+
+                                <span>
+                                    Create a professional health report
+                                </span>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+
+                        </button>
+
+
+
+                        <button
+                            type="button"
+                            class="action-card secondary-action"
+                            id="printReportBtn"
+                        >
+
+
+                            <div class="action-card-icon">
+
+                                <i class="fa-solid fa-print"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Print Report
+                                </strong>
+
+                                <span>
+                                    Print or save as PDF
+                                </span>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+
+                        </button>
+
+
+
+                        <a
+                            href="{{ url_for('predict') }}"
+                            class="action-card secondary-action"
+                        >
+
+
+                            <div class="action-card-icon">
+
+                                <i class="fa-solid fa-rotate"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    New Analysis
+                                </strong>
+
+                                <span>
+                                    Analyze another MRI
+                                </span>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+
+                        </a>
+
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     DISCLAIMER
+                ================================================== -->
+
+                <div class="medical-disclaimer">
+
+
+                    <div class="disclaimer-icon">
+
+                        <i class="fa-solid fa-shield-heart"></i>
+
+                    </div>
+
+
+                    <div class="disclaimer-content">
+
+
+                        <strong>
+                            Important Medical Disclaimer
+                        </strong>
+
+
+                        <p>
+
+                            AarogyaDrishti is an AI-assisted
+                            educational and screening-support
+                            system. The prediction displayed
+                            on this page is generated by a
+                            machine learning model and should
+                            not be considered a confirmed
+                            medical diagnosis.
+
+                            {% if prediction == 'Yes Brain Tumor' %}
+
+                                A qualified medical professional
+                                should review this result and
+                                determine the appropriate next steps.
+
+                            {% else %}
+
+                                A non-tumorous AI prediction does
+                                not guarantee the absence of disease.
+                                Consult a qualified healthcare
+                                professional if symptoms or concerns
+                                are present.
+
+                            {% endif %}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="report-footer">
+
+        <div class="report-container">
+
+
+            <div class="footer-main">
+
+
+                <div class="footer-brand">
+
+
+                    <a
+                        href="{{ url_for('home') }}"
+                        class="brand"
+                    >
+
+                        <div class="brand-logo-wrap">
+
+                            <img
+                                src="{{ url_for('static', filename='images/logo.png') }}"
+                                alt="AarogyaDrishti"
+                                class="brand-logo"
+                            >
+
+                        </div>
+
+
+                        <div class="brand-text">
+
+                            <span class="brand-name">
+                                AarogyaDrishti
+                            </span>
+
+                            <span class="brand-tagline">
+                                Medical AI Intelligence
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                    <p>
+                        AI-assisted brain MRI analysis
+                        for health awareness.
+                    </p>
+
+                </div>
+
+
+
+                <div class="footer-links">
+
+
+                    <a href="{{ url_for('home') }}">
+                        Home
+                    </a>
+
+
+                    <a href="{{ url_for('predict') }}">
+                        Prediction
+                    </a>
+
+
+                    <a href="{{ url_for('history') }}">
+                        History
+                    </a>
+
+
+                    <a href="{{ url_for('about') }}">
+                        About
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="footer-bottom">
+
+
+                <span>
+
+                    ©
+
+                    <span data-current-year>
+                        2026
+                    </span>
+
+                    AarogyaDrishti
+
+                </span>
+
+
+                <span>
+                    AI-powered health awareness
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        class="report-toast"
+        id="reportToast"
+    >
+
+
+        <div class="toast-icon">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+        </div>
+
+
+        <div class="toast-content">
+
+            <strong id="toastTitle">
+                AarogyaDrishti
+            </strong>
+
+
+            <span id="toastMessage">
+                Ready
+            </span>
+
+        </div>
+
+
+        <button
+            type="button"
+            id="toastClose"
+            aria-label="Close notification"
+        >
+            ×
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         REPORT DATA
+         
+         IMPORTANT:
+         JINJA IS USED ONLY INSIDE HTML ATTRIBUTES.
+         NO JINJA IS INSIDE JAVASCRIPT.
+         
+         This removes the VS Code:
+         "Expression expected"
+         error.
+    ====================================================== -->
+
+    <div
+        id="reportData"
+
+        data-patient-name="{{ patient_name | default('Patient') }}"
+
+        data-patient-age="{{ patient_age | default('--') }}"
+
+        data-patient-gender="{{ patient_gender | default('--') }}"
+
+        data-prediction="{{ prediction | default('No Brain Tumor') }}"
+
+        data-confidence="{{ confidence | default(90) }}"
+
+        data-report-id="{{ report_id | default('AD-000001') }}"
+
+        data-report-date="{{ report_date | default('Today') }}"
+
+        data-report-time="{{ report_time | default('--:--') }}"
+
+        hidden
+    ></div>
+
+
+
+    <!-- =====================================================
+         GLOBAL JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/main.js') }}"
+    ></script>
+
+
+
+    <!-- =====================================================
+         REPORT JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/report.js') }}"
+    ></script>
+
+
+
+    <!-- =====================================================
+         SAFE REPORT DATA INITIALIZATION
+         
+         No Jinja is inside this JavaScript.
+    ====================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const dataElement =
+                    document.getElementById(
+                        "reportData"
+                    );
+
+
+                if (!dataElement) {
+                    return;
+                }
+
+
+                window.AAROGYA_REPORT = {
+
+                    patientName:
+                        dataElement.dataset.patientName || "Patient",
+
+                    patientAge:
+                        dataElement.dataset.patientAge || "--",
+
+                    patientGender:
+                        dataElement.dataset.patientGender || "--",
+
+                    prediction:
+                        dataElement.dataset.prediction || "No Brain Tumor",
+
+                    confidence:
+                        Number(
+                            dataElement.dataset.confidence || 90
+                        ),
+
+                    reportId:
+                        dataElement.dataset.reportId || "AD-000001",
+
+                    reportDate:
+                        dataElement.dataset.reportDate || "Today",
+
+                    reportTime:
+                        dataElement.dataset.reportTime || "--:--"
+
+                };
+
+
+                /*
+                 * Keep confidence visually safe.
+                 */
+
+                const confidence =
+                    Math.max(
+                        0,
+                        Math.min(
+                            100,
+                            window.AAROGYA_REPORT.confidence
+                        )
+                    );
+
+
+                const confidenceValue =
+                    document.getElementById(
+                        "confidenceValue"
+                    );
+
+
+                const confidenceFill =
+                    document.getElementById(
+                        "confidenceFill"
+                    );
+
+
+                if (confidenceValue) {
+
+                    confidenceValue.textContent =
+                        confidence.toFixed(2) + "%";
+
+                }
+
+
+                if (confidenceFill) {
+
+                    confidenceFill.style.width =
+                        confidence + "%";
+
+                }
+
+
+                /*
+                 * Make sure the displayed result always
+                 * follows the Flask prediction value.
+                 */
+
+                const prediction =
+                    window.AAROGYA_REPORT.prediction;
+
+
+                const predictionClass =
+                    document.getElementById(
+                        "predictionClass"
+                    );
+
+
+                if (predictionClass) {
+
+                    if (
+                        prediction ===
+                        "Yes Brain Tumor"
+                    ) {
+
+                        predictionClass.textContent =
+                            "Tumorous";
+
+                    } else {
+
+                        predictionClass.textContent =
+                            "Non-Tumorous";
+
+                    }
+
+                }
+
+            }
+
+        );
+
+    </script>
+
+
+</body>
+
+</html>
